@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class BreakpointCalculatorService < BaseService
+class FullCalculatorService < BaseService
   attribute :race, Types::Strict::Symbol
   attribute :opponent, Types::Strict::Symbol
 
@@ -16,6 +16,6 @@ class BreakpointCalculatorService < BaseService
   end
 
   pipe :step_3 do
-    true
+
   end
 end

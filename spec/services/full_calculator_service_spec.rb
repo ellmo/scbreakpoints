@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe BreakpointCalculatorService do
+describe FullCalculatorService do
   subject { service.call }
 
   let(:service) { described_class.new(arguments) }
