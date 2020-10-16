@@ -3,5 +3,5 @@ units:
     shields: 0
     hitpoints: 40
     armor: 0
-    attack: 6
-    strikes: 0
+    damage: 6
+    attacks: 0

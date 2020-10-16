@@ -3,5 +3,5 @@ units:
     shields: 60
     hitpoints: 100
     armor: 1
-    attack: 8
-    strikes: 2
+    damage: 8
+    attacks: 2
