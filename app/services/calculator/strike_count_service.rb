@@ -7,6 +7,6 @@ class Calculator::StrikeCountService < BaseService
   attribute :hitpoints, Types::Strict::Integer
 
   pipe :calculate_strikes do
-    hitpoints.to_f / (attacks * (damage - armor)).ceil
+    (hitpoints.to_f / (attacks * (damage - armor))).ceil
   end
 end

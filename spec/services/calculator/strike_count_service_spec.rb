@@ -17,6 +17,22 @@ describe Calculator::StrikeCountService do
       { hitpoints: 35, damage: 8, attacks: 2, armor: 0 }
     end
 
+    it "is a success" do
+      expect(subject).to be_success
+    end
 
+    it "returns 3 strikes" do
+      expect(subject.success).to eq 3
+    end
+  end
+
+  context "pure Ling vs pure Marine arguments passed" do
+    let(:arguments) do
+      { hitpoints: 40, damage: 5, attacks: 1, armor: 0 }
+    end
+
+    it "returns 3 strikes" do
+      expect(subject.success).to eq 8
+    end
   end
 end
