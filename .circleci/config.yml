@@ -9,5 +9,11 @@ jobs:
     executor: ruby/default
     steps:
       - checkout
-      - run: gem install bundler -v='2.1.4'
-      - ruby/bundle-install
+      - run:
+        name: Bundle install
+        command: |
+          gem install bundler -v='2.1.4'
+          bundle install
+      - run:
+        name: RSpec
+        command: bundle exec rspec
