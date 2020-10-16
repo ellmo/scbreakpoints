@@ -19,6 +19,7 @@ gem "sass-rails", ">= 6"
 # HELPERS
 #=======
 gem "bootsnap", ">= 1.4.2", require: false
+gem "piper-rb"
 
 group :development, :test do
   gem "pry-rails"
