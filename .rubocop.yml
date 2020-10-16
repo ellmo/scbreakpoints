@@ -1,0 +1,34 @@
+# METRICS
+MethodLength:
+  CountComments: false
+  Max: 15
+  Exclude:
+    - 'spec/**/*'
+Metrics/LineLength:
+  Enabled: false
+Metrics/AbcSize:
+  Max: 25
+  Exclude:
+    - 'spec/**/*'
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+# LAYOUT
+Layout/DotPosition:
+  EnforcedStyle: leading
+  Enabled: true
+Layout/ExtraSpacing:
+  Enabled: false
+Layout/SpaceAroundOperators:
+  Enabled: false
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+
+# STYLE
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
