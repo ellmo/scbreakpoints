@@ -10,10 +10,11 @@ class Calculator::UnitService < BaseService
   #   bump(:data) { Rails.cache.fetch("date") }
   # end
 
-  pipe :prepare_values do
+  pipe :prepare_attack_values do
     {
       damage:    unit_fetch("damage"),
       attacks:   unit_fetch("attacks"),
+      bonus:     unit_fetch("bonus"),
       type:      unit_fetch("type"),
       hitpoints: target_fetch("hitpoints"),
       armor:     target_fetch("armor"),
@@ -21,11 +22,17 @@ class Calculator::UnitService < BaseService
     }
   end
 
-  pipe :calculate_strikes do
-    Calculator::StrikeCountService
+  pipe :calculate_breakpoints do
+    Calculator::Breakpoints
       .new(last_result)
       .call
   end
+
+  # pipe :calculate_strikes do
+  #   Calculator::StrikeCountService
+  #     .new(last_result)
+  #     .call
+  # end
 
   def unit_fetch(key)
     data["units"][unit][key]
