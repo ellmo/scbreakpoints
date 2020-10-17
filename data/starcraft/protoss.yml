@@ -14,7 +14,7 @@ units:
     hitpoints: 180
     armor: 1
     damage: 20
-    type: normal
+    type: explosive
     bonus: 2
     attacks: 1
 
