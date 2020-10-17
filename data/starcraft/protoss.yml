@@ -1,11 +1,20 @@
 units:
   zealot:
     size: small
-    shields: 60
-    hitpoints: 100
+    # shields: 60
+    hitpoints: 160
     armor: 1
     damage: 8
     type: normal
     bonus: 1
     attacks: 2
+  dragoon:
+    size: large
+    # shields: 80
+    hitpoints: 180
+    armor: 1
+    damage: 20
+    type: normal
+    bonus: 2
+    attacks: 1
 
