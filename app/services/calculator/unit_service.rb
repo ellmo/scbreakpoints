@@ -12,12 +12,12 @@ class Calculator::UnitService < BaseService
 
   pipe :prepare_values do
     {
-      damage: unit_fetch("damage"),
-      attacks: unit_fetch("attacks"),
-      type: unit_fetch("type"),
+      damage:    unit_fetch("damage"),
+      attacks:   unit_fetch("attacks"),
+      type:      unit_fetch("type"),
       hitpoints: target_fetch("hitpoints"),
-      armor: target_fetch("armor"),
-      size: target_fetch("size")
+      armor:     target_fetch("armor"),
+      size:      target_fetch("size")
     }
   end
 
