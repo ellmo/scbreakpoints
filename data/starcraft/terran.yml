@@ -1,7 +1,19 @@
 units:
   marine:
+    size: small
     shields: 0
     hitpoints: 40
     armor: 0
     damage: 6
-    attacks: 0
+    type: normal
+    bonus: 1
+    attacks: 1
+  siege_tank_siege_mode:
+    size: large
+    shields: 0
+    hitpoints: 125
+    armor: 1
+    damage: 70
+    type: explosive
+    bonus: 5
+    attacks: 1

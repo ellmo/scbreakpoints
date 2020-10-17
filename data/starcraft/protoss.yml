@@ -1,7 +1,11 @@
 units:
   zealot:
+    size: small
     shields: 60
     hitpoints: 100
     armor: 1
     damage: 8
+    type: normal
+    bonus: 1
     attacks: 2
+
