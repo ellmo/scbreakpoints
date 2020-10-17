@@ -16,6 +16,6 @@ class FullCalculatorService < BaseService
   end
 
   pipe :step_3 do
-
+    true
   end
 end
