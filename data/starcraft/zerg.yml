@@ -1,7 +1,10 @@
 units:
   zergling:
+    size: small
     shields: 0
     hitpoints: 35
     armor: 0
-    attack: 5
-    strikes: 0
+    damage: 5
+    type: normal
+    bonus: 1
+    attacks: 1

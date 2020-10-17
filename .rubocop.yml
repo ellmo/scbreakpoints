@@ -24,8 +24,13 @@ Layout/SpaceAroundOperators:
   Enabled: false
 Layout/EmptyLinesAroundClassBody:
   Enabled: false
+Layout/HashAlignment:
+  EnforcedHashRocketStyle: separator
+  EnforcedColonStyle: table
 
 # STYLE
+Style/ClassAndModuleChildren:
+  Enabled: false
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/FrozenStringLiteralComment:

@@ -4,10 +4,16 @@ class DataLoaderService < BaseService
   SC1_PATH = File.join(Rails.root, "data", "starcraft")
 
   pipe :load_entries do
-    entries = Dir.each_child(SC1_PATH).each_with_object({}) do |filename, hsh|
+    start_hash = { "units" => {} }
+
+    entries = Dir.each_child(SC1_PATH).each_with_object(start_hash) do |filename, hsh|
       base_filename = filename.scan(/^\w+/).first
       file = File.read(File.join(SC1_PATH, filename))
-      hsh[base_filename] = YAML.safe_load(file)
+
+      data = YAML.safe_load(file)
+
+      hsh[base_filename] = data
+      hsh["units"].merge! data["units"]
     end
 
     rslt { entries }
