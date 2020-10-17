@@ -44,5 +44,23 @@ describe Calculator::Breakpoints do
         end
       end
     end
+
+    context "Tank vs. Goon" do
+      let(:arguments) do
+        { shields: 80, hitpoints: 100, armor: 1, damage: 30, bonus: 3, attacks: 1  }
+      end
+
+      context "0 attack Tank vs 0 armor Goon" do
+        it "takes 3 hits" do
+          expect(subject[0, 0]).to eq 7
+        end
+      end
+
+      context "2 attack Tank vs 0 armor Goon" do
+        it "takes 6 hits" do
+          expect(subject[2, 0]).to eq 6
+        end
+      end
+    end
   end
 end

@@ -10,11 +10,12 @@ class Calculator::Breakpoints < BaseService
   attribute :bonus,     Types::Strict::Integer
   attribute :damage,    Types::Strict::Integer
   attribute :hitpoints, Types::Strict::Integer
+  attribute :shields,   Types::Strict::Integer.default(0)
   attribute :size,      Types::Strict::String.default("small")
   attribute :type,      Types::Strict::String.default("normal")
 
   pipe :build_strike_matrix do
-    matrix = Matrix.build(MAX_UPGRADES + 1) do |dam_upgrade, arm_upgrade|
+    Matrix.build(MAX_UPGRADES + 1) do |dam_upgrade, arm_upgrade|
       # label = "D#{dam_upgrade}:A#{arm_upgrade}"
       strikes = Calculator::StrikeCountService
                 .new(corrected_params(dam_upgrade * bonus, arm_upgrade))
@@ -23,7 +24,6 @@ class Calculator::Breakpoints < BaseService
       # "[#{label}] => #{strikes}"
       strikes
     end
-    matrix
   end
 
   def corrected_params(dam_upgrade, arm_upgrade)

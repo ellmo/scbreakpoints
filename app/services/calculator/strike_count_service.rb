@@ -12,21 +12,35 @@ class Calculator::StrikeCountService < BaseService
   attribute :attacks,   Types::Strict::Integer
   attribute :armor,     Types::Strict::Integer
   attribute :hitpoints, Types::Strict::Integer
+  attribute :shields,   Types::Strict::Integer.default(0)
   attribute :size,      Types::Strict::String.default("small")
   attribute :type,      Types::Strict::String.default("normal")
 
-  pipe :calculate_coefficient do
-    bump(:damage) { damage * coefficient }
+  pipe :shield_strikes_and_carryover do
+    if shields.positive?
+      { strikes: (shields.to_f / damage).ceil, carryover: (damage - (shields % damage)) }
+    else
+      { strikes: 0, carryover: 0 }
+    end
+  end
+
+  pipe :shield_penetration do
+    bump(:hitpoints) { hitpoints - body_damage(last_result[:carryover]) } if shields.positive?
+    last_result[:strikes]
   end
 
   pipe :calculate_strikes do
-    (hitpoints.to_f / (attacks * (damage - armor))).ceil
+    last_result + (hitpoints.to_f / body_damage).ceil
   end
 
   def coefficient
     return 1.0 if type == "normal"
 
     COEFF_MATRIX[type_i][size_i]
+  end
+
+  def body_damage(actual_damage = damage)
+    [(attacks * (actual_damage * coefficient - armor)).round, 1].max
   end
 
   def size_i
