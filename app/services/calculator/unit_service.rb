@@ -3,7 +3,7 @@
 class Calculator::UnitService < BaseService
   attribute :unit,   Types::Strict::String
   attribute :target, Types::Strict::String
-  attribute :data,   Types::Strict::Hash.optional.default({})
+  attribute :data,   Types::Strict::Hash.optional.default({}.freeze)
 
   # pipe :fetch_data do
   #   binding.pry
