@@ -13,6 +13,8 @@ gem "rails", "~> 6.0.3", ">= 6.0.3.2"
 #=====
 gem "jbuilder", "~> 2.7"
 gem "sass-rails", ">= 6"
+gem "slim", "~> 4.1"
+gem "slim-rails", "~> 3.2"
 
 #=========
 # HELPERS
