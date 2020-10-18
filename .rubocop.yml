@@ -1,3 +1,7 @@
+AllCops:
+  Exclude:
+    - 'app/views/**/*.slim'
+
 # METRICS
 MethodLength:
   CountComments: false
