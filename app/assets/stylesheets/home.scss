@@ -1,19 +1,8 @@
 @import '_settings';
 
-.bg-yellow {
-  background-color: #f2f280;
-}
-
-.bg-blue {
-  background-color: #9191ff;
-}
-
-.bg-green {
-  background-color: #7cc47c;
-}
-
-.bg-red {
-  background-color: #ff7c7c;
+.spaceholder {
+  background-color: $dark-gray;
+  border: 1px solid lime;
 }
 
 .tabs.race-selector {
@@ -44,4 +33,8 @@
 .tabs-content.race-tab {
   background-color: $medium-gray;
   border: 0;
+}
+
+#footer {
+  color: $dark-gray;
 }
