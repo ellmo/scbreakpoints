@@ -1,10 +1,10 @@
 .grid-container
-  .grid-y.medium-grid-frame.bg-yellow
-    .cell.medium-auto.medium-cell-block-container.bg-green
-      .grid-x.grid-padding-x.bg-red
-        .cell.medium-6.bg-blue
-          | Mine
+  .grid-y.medium-grid-frame
+    .cell.medium-auto.medium-cell-block-container
+      .grid-x.grid-padding-x
         .cell.medium-6
-          | Theirs
-    .cell.shrink.footer
-      .text-right SC:Breakpoints 2020
+          = render "mine"
+        .cell.medium-6
+          = render "theirs"
+    .cell.shrink.footer#footer
+      .text-center SC:Breakpoints 2020

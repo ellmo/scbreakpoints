@@ -1,19 +1,40 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+@import '_settings';
 
-.bg-yellow {
-  background-color: #f2f280;
+.spaceholder {
+  background-color: $dark-gray;
+  border: 1px solid lime;
 }
 
-.bg-blue {
-  background-color: #9191ff;
+.tabs.race-selector {
+  background: $dark-gray;
+  border: 0;
+
+  li {
+    a {
+      display: block;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      background-size: 100%;
+      background-color: $medium-gray;
+
+      &.terran { background-image: asset_url("terran-inactive.png"); }
+      &.protoss { background-image: asset_url("protoss-inactive.png"); }
+      &.zerg { background-image: asset_url("zerg-inactive.png"); }
+    }
+    &.is-active {
+      .terran { background-image: asset_url("terran.png"); }
+      .protoss { background-image: asset_url("protoss.png"); }
+      .zerg { background-image: asset_url("zerg.png"); }
+    }
+  }
 }
 
-.bg-green {
-  background-color: #7cc47c;
+.tabs-content.race-tab {
+  background-color: $medium-gray;
+  border: 0;
 }
 
-.bg-red {
-  background-color: #ff7c7c;
+#footer {
+  color: $dark-gray;
 }
