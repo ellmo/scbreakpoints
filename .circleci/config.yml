@@ -11,7 +11,7 @@ ruby_machine: &ruby_machine
     - image: circleci/ruby:2.6.6-stretch-node
       environment:
         RAILS_ENV: test
-        BUNDLE_PATH: $BUNDLE_PATH
+        BUNDLE_PATH: vendor/bundle
         BUNDLER_VERSION: 2.1.4
     - image: circleci/mongo:4.0.20-xenial-ram
   executor: ruby/default
@@ -26,12 +26,12 @@ jobs:
       - run:
           name: Bundle install
           command: |
-            gem install bundler -v=$BUNDLER_VERSION
-            bundle install --path=$BUNDLE_PATH
+            gem install bundler -v=${BUNDLER_VERSION}
+            bundle install --path=${BUNDLE_PATH}
       - persist_to_workspace:
           root: ~/scbreakpoints
           paths:
-            - $BUNDLE_PATH
+            - ${BUNDLE_PATH}
   test:
     <<: *ruby_machine
     steps:
@@ -41,7 +41,7 @@ jobs:
       - run:
           name: RSpec
           command: |
-            gem install bundler -v=$BUNDLER_VERSION
+            gem install bundler -v=${BUNDLER_VERSION}
             bundle exec rspec
 
 workflows:
