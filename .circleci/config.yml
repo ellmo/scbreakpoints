@@ -9,6 +9,9 @@ ruby_machine: &ruby_machine
   <<: *defaults
   docker:
     - image: circleci/ruby:2.6.6-stretch-node
+      environment:
+        RAILS_ENV: test
+        BUNDLE_PATH: vendor/bundle
     - image: circleci/mongo:4.0.20-xenial-ram
   executor: ruby/default
 
@@ -35,7 +38,7 @@ jobs:
           at: ~/scbreakpoints
       - run:
           name: RSpec
-          command: bundle exec rspec --path=vendor/bundle
+          command: bundle exec rspec
 
 workflows:
   version: 2
