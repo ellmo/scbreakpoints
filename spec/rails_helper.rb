@@ -17,4 +17,8 @@ RSpec.configure do |config|
     Mongoid.purge!
     Rails.application.load_seed
   end
+
+  config.before(:each, type: :request) do
+    host! "localhost"
+  end
 end
