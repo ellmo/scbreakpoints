@@ -3,7 +3,7 @@ orbs:
   ruby: circleci/ruby@0.1.2
 
 defaults: &defaults
-  working_directory: ~/$WORKING_DIR
+  working_directory: $WORKING_DIR
 
 ruby_machine: &ruby_machine
   <<: *defaults
@@ -21,14 +21,14 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/$WORKING_DIR
+          at: "~/$WORKING_DIR"
       - run:
           name: Bundle install
           command: |
             gem install bundler -v=$BUNDLER_VERSION
             bundle install --path=$BUNDLE_PATH
       - persist_to_workspace:
-          root: ~/$WORKING_DIR
+          root: "~/$WORKING_DIR"
           paths:
             - $BUNDLE_PATH
   test:
@@ -36,7 +36,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/$WORKING_DIR
+          at: "~/$WORKING_DIR"
       - run:
           name: RSpec
           command: |
