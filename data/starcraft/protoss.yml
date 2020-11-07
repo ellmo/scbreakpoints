@@ -4,17 +4,28 @@ units:
     # shields: 60
     hitpoints: 160
     armor: 1
-    damage: 8
-    type: normal
-    bonus: 1
-    attacks: 2
+    attack:
+      ground:
+        damage: 8
+        type: normal
+        bonus: 1
+        attacks: 2
+
   dragoon:
     size: large
     # shields: 80
     hitpoints: 180
     armor: 1
-    damage: 20
-    type: explosive
-    bonus: 2
-    attacks: 1
+    attack:
+      ground:
+        damage: 20
+        type: explosive
+        bonus: 2
+        attacks: 1
+      air:
+        damage: 20
+        type: explosive
+        bonus: 2
+        attacks: 1
+
 

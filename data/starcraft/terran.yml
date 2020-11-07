@@ -4,34 +4,49 @@ units:
     shields: 0
     hitpoints: 40
     armor: 0
-    damage: 6
-    type: normal
-    bonus: 1
-    attacks: 1
+    attack:
+      ground:
+        damage: 6
+        type: normal
+        bonus: 1
+        attacks: 1
+      air:
+        damage: 6
+        type: normal
+        bonus: 1
+        attacks: 1
+
   vulture:
     size: medium
     shields: 0
     hitpoints: 80
     armor: 0
-    damage: 20
-    type: plasma
-    bonus: 2
-    attacks: 1
+    attack:
+      ground:
+        damage: 20
+        type: plasma
+        bonus: 2
+        attacks: 1
   siege_tank_tank_mode:
     size: large
     shields: 0
     hitpoints: 150
     armor: 1
-    damage: 30
-    type: explosive
-    bonus: 3
-    attacks: 1
+    attack:
+      ground:
+        damage: 30
+        type: explosive
+        bonus: 3
+        attacks: 1
+
   siege_tank_siege_mode:
     size: large
     shields: 0
     hitpoints: 150
     armor: 1
-    damage: 70
-    type: explosive
-    bonus: 5
-    attacks: 1
+    attack:
+      ground:
+        damage: 70
+        type: explosive
+        bonus: 5
+        attacks: 1

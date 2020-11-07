@@ -3,16 +3,24 @@ units:
     size: small
     hitpoints: 35
     armor: 0
-    damage: 5
-    type: normal
-    bonus: 1
-    attacks: 1
+    attack:
+      ground:
+        damage: 5
+        type: normal
+        bonus: 1
+        attacks: 1
   hydralisk:
     size: medium
     hitpoints: 80
     armor: 0
-    damage: 10
-    type: explosive
-    bonus: 1
-    attacks: 1
-
+    attack:
+      ground:
+        damage: 10
+        type: explosive
+        bonus: 1
+        attacks: 1
+      air:
+        damage: 10
+        type: explosive
+        bonus: 1
+        attacks: 1
