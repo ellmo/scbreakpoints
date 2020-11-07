@@ -8,13 +8,16 @@ class Calculator::StrikeCountService < BaseService
   TYPES        = %w[explosive plasma].freeze
   # COEFF_MATRIX = Matrix[[0.25, 0.5, 1.0], [0.5, 0.75, 1.0]].freeze
 
-  attribute :damage,    Types::Strict::Integer
-  attribute :attacks,   Types::Strict::Integer
-  attribute :armor,     Types::Strict::Integer
-  attribute :hitpoints, Types::Strict::Integer
-  attribute :shields,   Types::Strict::Integer.default(0)
-  attribute :size,      Types::Strict::String.default("small")
-  attribute :type,      Types::Strict::String.default("normal")
+  attribute :unit,          Types::Strict::String
+  attribute :target,        Types::Strict::String
+  attribute :bonus_attack,  Types::Strict::Integer.default(0)
+  attribute :bonus_armor,   Types::Strict::Integer.default(0)
+  attribute :bonus_shield,  Types::Strict::Integer.default(0)
+
+  pipe :fetch_data do
+    bump(:unit)   { Unit.find_by name: unit }
+    bump(:target) { Unit.find_by name: target }
+  end
 
   pipe :shield_strikes_and_carryover do
     if shields.positive?
@@ -34,20 +37,32 @@ class Calculator::StrikeCountService < BaseService
   end
 
   def coefficient
-    return 1.0 if type == "normal"
+    return 1.0 if unit.type_i.nil?
 
-    COEFF_MATRIX[type_i][size_i]
+    COEFF_MATRIX[unit.type_i][target.size_i]
   end
 
   def body_damage(actual_damage = damage)
     [(attacks * (actual_damage * coefficient - armor)).round, 1].max
   end
 
-  def size_i
-    SIZES.index size
+  def damage
+    (unit.attack["ground"]["damage"]) + (bonus_attack * unit.attack["ground"]["bonus"])
   end
 
-  def type_i
-    TYPES.index type
+  def attacks
+    unit.attack["ground"]["attacks"]
+  end
+
+  def shields
+    target.shields || 0
+  end
+
+  def armor
+    target.armor + bonus_armor
+  end
+
+  def hitpoints
+    target.hitpoints
   end
 end

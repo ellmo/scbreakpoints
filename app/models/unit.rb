@@ -1,4 +1,7 @@
 class Unit
+  SIZES = %w[small medium large].freeze
+  TYPES = %w[explosive plasma].freeze
+
   include Mongoid::Document
   field :race,      type: String
   field :name,      type: String
@@ -10,4 +13,12 @@ class Unit
   field :shields,   type: Integer
 
   field :attack,    type: Hash
+
+  def size_i
+    SIZES.index size
+  end
+
+  def type_i
+    TYPES.index attack["ground"]["type"]
+  end
 end
