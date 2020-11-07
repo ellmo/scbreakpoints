@@ -24,11 +24,11 @@ jobs:
           command: |
             gem install bundler -v='2.1.4'
             bundle install
-      - run:
-          name: Dockerize MongoDB
-          command: dockerize -wait tcp://localhost:27017 -timeout 1m
+      # - run:
+      #     name: Dockerize MongoDB
+      #     command: dockerize -wait tcp://localhost:27017 -timeout 1m
   test:
-    # <<: *ruby_machine
+    <<: *ruby_machine
     steps:
       - attach_workspace:
           at: ~/mideastunes
