@@ -34,3 +34,7 @@ end
 group :development do
   gem "listen"
 end
+
+group :test do
+  gem "mongoid-rspec"
+end
