@@ -25,12 +25,12 @@ jobs:
       - run:
           name: Bundle install
           command: |
-            gem install bundler -v='$BUNDLER_VERSION'
+            gem install bundler -v=$BUNDLER_VERSION
             bundle install --path=$BUNDLE_PATH
       - persist_to_workspace:
-          root: ${WORKING_DIR}
+          root: ~/$WORKING_DIR
           paths:
-            - ${BUNDLE_PATH}
+            - $BUNDLE_PATH
   test:
     <<: *ruby_machine
     steps:
@@ -40,7 +40,7 @@ jobs:
       - run:
           name: RSpec
           command: |
-            gem install bundler -v='$BUNDLER_VERSION'
+            gem install bundler -v=$BUNDLER_VERSION
             bundle exec rspec
 
 workflows:
