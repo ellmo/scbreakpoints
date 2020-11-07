@@ -3,7 +3,7 @@ orbs:
   ruby: circleci/ruby@0.1.2
 
 defaults: &defaults
-  working_directory: ~/scbreakpoints
+  working_directory: ${WORKING_DIR}
 
 ruby_machine: &ruby_machine
   <<: *defaults
@@ -11,7 +11,7 @@ ruby_machine: &ruby_machine
     - image: circleci/ruby:2.6.6-stretch-node
       environment:
         RAILS_ENV: test
-        BUNDLE_PATH: vendor/bundle
+        BUNDLE_PATH: ${BUNDLE_PATH}
     - image: circleci/mongo:4.0.20-xenial-ram
   executor: ruby/default
 
@@ -21,25 +21,27 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/scbreakpoints
+          at: ${WORKING_DIR}
       - run:
           name: Bundle install
           command: |
-            gem install bundler -v='2.1.4'
-            bundle install --path=vendor/bundle
+            gem install bundler -v='${BUNDLER_VERSION}'
+            bundle install --path=${BUNDLE_PATH}
       - persist_to_workspace:
-          root: ~/scbreakpoints
+          root: ${WORKING_DIR}
           paths:
-            - vendor/bundle
+            - {$BUNDLE_PATH}
   test:
     <<: *ruby_machine
     steps:
       - checkout
       - attach_workspace:
-          at: ~/scbreakpoints
+          at: ${WORKING_DIR}
       - run:
           name: RSpec
-          command: bundle exec rspec
+          command: |
+            gem install bundler -v='${BUNDLER_VERSION}'
+            bundle exec rspec
 
 workflows:
   version: 2
