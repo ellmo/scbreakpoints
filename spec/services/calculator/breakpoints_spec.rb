@@ -17,7 +17,7 @@ describe Calculator::Breakpoints do
 
     context "Zealot vs. Ling" do
       let(:arguments) do
-        { hitpoints: 35, damage: 8, bonus: 1, attacks: 2, armor: 0 }
+        { unit: "zealot", target: "zergling"  }
       end
 
       context "0 attack Zealot, 0 armor Ling" do
@@ -47,7 +47,7 @@ describe Calculator::Breakpoints do
 
     context "Tank vs. Goon" do
       let(:arguments) do
-        { shields: 80, hitpoints: 100, armor: 1, damage: 30, bonus: 3, attacks: 1  }
+        { unit: "siege_tank_tank_mode", target: "dragoon"  }
       end
 
       context "0 attack Tank vs 0 armor Goon" do
