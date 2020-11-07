@@ -25,12 +25,18 @@ jobs:
       - run:
           name: Dockerize MongoDB
           command: dockerize -wait tcp://localhost:27017 -timeout 1m
-
   test:
     <<: *ruby_machine
-    requires:
-      - build
     steps:
       - run:
         name: RSpec
         command: bundle exec rspec
+
+workflows:
+  version: 2
+  build_test_deploy:
+    jobs:
+      - build
+      - test:
+        requires:
+          - build
