@@ -2,12 +2,19 @@ version: 2.1
 orbs:
   ruby: circleci/ruby@0.1.2
 
+defaults: &defaults
+  working_directory: ~/scbreakpoints
+
+ruby_machine: &ruby_machine
+  <<: *defaults
+  docker:
+    - image: circleci/ruby:2.6.6-stretch-node
+    - image: circleci/mongo:4.0.20-xenial-ram
+  executor: ruby/default
+
 jobs:
-  build:
-    docker:
-      - image: circleci/ruby:2.6.6-stretch-node
-      - image: circleci/mongo:4.0.20-xenial-ram
-    executor: ruby/default
+  Build:
+    <<: *ruby_machine
     steps:
       - checkout
       - run:
@@ -16,5 +23,13 @@ jobs:
             gem install bundler -v='2.1.4'
             bundle install
       - run:
-          name: RSpec
-          command: bundle exec rspec
+          name: Dockerize MongoDB
+          command: dockerize -wait tcp://localhost:27017 -timeout 1m
+
+  Test:
+    <<: *ruby_machine
+    requires:
+      - Build
+    - run:
+      name: RSpec
+      command: bundle exec rspec
