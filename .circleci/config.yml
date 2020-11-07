@@ -34,6 +34,7 @@ jobs:
   test:
     <<: *ruby_machine
     steps:
+      - checkout
       - attach_workspace:
           at: ~/scbreakpoints
       - run:
