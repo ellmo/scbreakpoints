@@ -27,7 +27,7 @@ jobs:
       - persist_to_workspace:
           root: ~/scbreakpoints
           paths:
-            - vendor/bundle
+            - .bundle/
   test:
     <<: *ruby_machine
     steps:
