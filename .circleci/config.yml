@@ -3,7 +3,7 @@ orbs:
   ruby: circleci/ruby@0.1.2
 
 defaults: &defaults
-  working_directory: $WORKING_DIR
+  working_directory: ~/scbreakpoints
 
 ruby_machine: &ruby_machine
   <<: *defaults
@@ -12,6 +12,7 @@ ruby_machine: &ruby_machine
       environment:
         RAILS_ENV: test
         BUNDLE_PATH: $BUNDLE_PATH
+        BUNDLER_VERSION: 2.1.4
     - image: circleci/mongo:4.0.20-xenial-ram
   executor: ruby/default
 
@@ -21,14 +22,14 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: "~/$WORKING_DIR"
+          at: ~/scbreakpoints
       - run:
           name: Bundle install
           command: |
             gem install bundler -v=$BUNDLER_VERSION
             bundle install --path=$BUNDLE_PATH
       - persist_to_workspace:
-          root: "~/$WORKING_DIR"
+          root: ~/scbreakpoints
           paths:
             - $BUNDLE_PATH
   test:
@@ -36,7 +37,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: "~/$WORKING_DIR"
+          at: ~/scbreakpoints
       - run:
           name: RSpec
           command: |
