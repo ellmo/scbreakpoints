@@ -65,6 +65,7 @@ GEM
       execjs (~> 2.0)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
+    bson (4.11.1)
     builder (3.2.4)
     coderay (1.1.3)
     concurrent-ruby (1.1.6)
@@ -130,6 +131,21 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.1)
+    mongo (2.13.1)
+      bson (>= 4.8.2, < 5.0.0)
+    mongoid (7.0.11)
+      activemodel (>= 5.1, < 6.1)
+      mongo (>= 2.7.0, < 3.0.0)
+    mongoid-compatibility (0.5.1)
+      activesupport
+      mongoid (>= 2.0)
+    mongoid-rspec (4.1.0)
+      activesupport (>= 3.0.0)
+      mongoid (>= 3.1)
+      mongoid-compatibility (>= 0.5.1)
+      rspec-core (~> 3.3)
+      rspec-expectations (~> 3.3)
+      rspec-mocks (~> 3.3)
     msgpack (1.3.3)
     nio4r (2.5.2)
     nokogiri (1.10.10)
@@ -268,6 +284,8 @@ DEPENDENCIES
   foundation-rails
   jbuilder (~> 2.7)
   listen
+  mongoid (~> 7.0.5)
+  mongoid-rspec
   piper-rb
   pry-rails
   puma (~> 4.1)

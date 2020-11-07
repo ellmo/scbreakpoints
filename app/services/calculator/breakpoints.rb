@@ -5,20 +5,19 @@ require "matrix"
 class Calculator::Breakpoints < BaseService
   MAX_UPGRADES = 3
 
-  attribute :armor,     Types::Strict::Integer
-  attribute :attacks,   Types::Strict::Integer
-  attribute :bonus,     Types::Strict::Integer
-  attribute :damage,    Types::Strict::Integer
-  attribute :hitpoints, Types::Strict::Integer
-  attribute :shields,   Types::Strict::Integer.default(0)
-  attribute :size,      Types::Strict::String.default("small")
-  attribute :type,      Types::Strict::String.default("normal")
+  attribute :unit,   Types::Strict::String
+  attribute :target, Types::Strict::String
 
   pipe :build_strike_matrix do
     Matrix.build(MAX_UPGRADES + 1) do |dam_upgrade, arm_upgrade|
       # label = "D#{dam_upgrade}:A#{arm_upgrade}"
       strikes = Calculator::StrikeCountService
-                .new(corrected_params(dam_upgrade * bonus, arm_upgrade))
+                .new(
+                  unit:         unit,
+                  target:       target,
+                  bonus_attack: dam_upgrade,
+                  bonus_armor:  arm_upgrade
+                )
                 .call
                 .success
       # "[#{label}] => #{strikes}"

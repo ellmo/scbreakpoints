@@ -15,7 +15,7 @@ describe FullCalculatorService do
   context "ZvP passed" do
     let(:arguments) { { race: :zerg, opponent: :protoss } }
 
-    it "is a success" do
+    xit "is a success" do
       expect(subject).to be_success
     end
   end

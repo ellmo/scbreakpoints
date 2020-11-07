@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+  mongo:
+    image: "mongo:4.0.20-xenial"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ""
+      MONGO_INITDB_ROOT_PASSWORD: ""
+    volumes:
+      - develop-mongo:/data/db
+      - develop-mongo:/data/configdb
+    ports:
+      - "27017-27019:27017-27019"
+
+  mongo-express:
+    image: mongo-express
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ""
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ""
+    ports:
+      - 8081:8081
+
+volumes:
+  develop-mongo: {}

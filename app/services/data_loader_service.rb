@@ -12,7 +12,10 @@ class DataLoaderService < BaseService
 
       data = YAML.safe_load(file)
 
-      hsh[base_filename] = data
+      data["units"].each_pair do |_unit, attributes|
+        attributes["race"] = base_filename
+      end
+
       hsh["units"].merge! data["units"]
     end
 
