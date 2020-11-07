@@ -35,7 +35,7 @@ jobs:
           at: ~/scbreakpoints
       - run:
           name: RSpec
-          command: bundle exec rspec
+          command: bundle exec rspec --path=vendor/bundle
 
 workflows:
   version: 2
