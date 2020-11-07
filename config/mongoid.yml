@@ -1,0 +1,8 @@
+development:
+  sessions:
+    default:
+      database: scbreakpoints-dev
+      hosts:
+        - localhost:27017
+      options:
+  options:
