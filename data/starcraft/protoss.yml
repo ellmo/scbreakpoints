@@ -1,8 +1,8 @@
 units:
   zealot:
     size: small
-    # shields: 60
-    hitpoints: 160
+    shields: 60
+    hitpoints: 100
     armor: 1
     attack:
       ground:
@@ -13,8 +13,8 @@ units:
 
   dragoon:
     size: large
-    # shields: 80
-    hitpoints: 180
+    shields: 80
+    hitpoints: 100
     armor: 1
     attack:
       ground:

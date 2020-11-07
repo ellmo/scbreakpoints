@@ -27,6 +27,7 @@ units:
         type: plasma
         bonus: 2
         attacks: 1
+
   siege_tank_tank_mode:
     size: large
     shields: 0
