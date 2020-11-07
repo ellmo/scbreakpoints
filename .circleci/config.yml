@@ -23,11 +23,11 @@ jobs:
           name: Bundle install
           command: |
             gem install bundler -v='2.1.4'
-            bundle install
+            bundle install --path=vendor/bundle
       - persist_to_workspace:
           root: ~/scbreakpoints
           paths:
-            - .bundle/
+            - vendor/bundle
   test:
     <<: *ruby_machine
     steps:
