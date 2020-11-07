@@ -1,8 +1,8 @@
 development:
-  sessions:
+  clients:
     default:
       database: scbreakpoints-dev
       hosts:
         - localhost:27017
       options:
-  options:
+        server_selection_timeout: 1
