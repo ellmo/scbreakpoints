@@ -13,7 +13,7 @@ ruby_machine: &ruby_machine
   executor: ruby/default
 
 jobs:
-  Build:
+  build:
     <<: *ruby_machine
     steps:
       - checkout
@@ -26,10 +26,11 @@ jobs:
           name: Dockerize MongoDB
           command: dockerize -wait tcp://localhost:27017 -timeout 1m
 
-  Test:
+  test:
     <<: *ruby_machine
     requires:
-      - Build
-    - run:
-      name: RSpec
-      command: bundle exec rspec
+      - build
+    steps:
+      - run:
+        name: RSpec
+        command: bundle exec rspec
