@@ -17,6 +17,8 @@ jobs:
     <<: *ruby_machine
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/mideastunes
       - run:
           name: Bundle install
           command: |
@@ -26,8 +28,10 @@ jobs:
           name: Dockerize MongoDB
           command: dockerize -wait tcp://localhost:27017 -timeout 1m
   test:
-    <<: *ruby_machine
+    # <<: *ruby_machine
     steps:
+      - attach_workspace:
+          at: ~/mideastunes
       - run:
           name: RSpec
           command: bundle exec rspec
