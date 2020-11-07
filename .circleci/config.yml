@@ -18,20 +18,21 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/mideastunes
+          at: ~/scbreakpoints
       - run:
           name: Bundle install
           command: |
             gem install bundler -v='2.1.4'
             bundle install
-      # - run:
-      #     name: Dockerize MongoDB
-      #     command: dockerize -wait tcp://localhost:27017 -timeout 1m
+      - persist_to_workspace:
+          root: ~/scbreakpoints
+          paths:
+            - vendor/bundle
   test:
     <<: *ruby_machine
     steps:
       - attach_workspace:
-          at: ~/mideastunes
+          at: ~/scbreakpoints
       - run:
           name: RSpec
           command: bundle exec rspec
