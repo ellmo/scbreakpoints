@@ -6,6 +6,7 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.6.6-stretch-node
+      - image: circleci/mongo:4.0.20-xenial-ram
     executor: ruby/default
     steps:
       - checkout
@@ -14,6 +15,9 @@ jobs:
           command: |
             gem install bundler -v='2.1.4'
             bundle install
+      - run:
+          name: Dockerize MongoDB
+          command: dockerize -wait tcp://localhost:27017 -timeout 1m
       - run:
           name: RSpec
           command: bundle exec rspec
