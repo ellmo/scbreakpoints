@@ -3,7 +3,7 @@ orbs:
   ruby: circleci/ruby@0.1.2
 
 defaults: &defaults
-  working_directory: $WORKING_DIR
+  working_directory: "${WORKING_DIR}"
 
 ruby_machine: &ruby_machine
   <<: *defaults
@@ -11,7 +11,7 @@ ruby_machine: &ruby_machine
     - image: circleci/ruby:2.6.6-stretch-node
       environment:
         RAILS_ENV: test
-        BUNDLE_PATH: $BUNDLE_PATH
+        BUNDLE_PATH: "${BUNDLE_PATH}"
     - image: circleci/mongo:4.0.20-xenial-ram
   executor: ruby/default
 
@@ -25,22 +25,22 @@ jobs:
       - run:
           name: Bundle install
           command: |
-            gem install bundler -v='$BUNDLER_VERSION'
-            bundle install --path=$BUNDLE_PATH
+            gem install bundler -v='${BUNDLER_VERSION}'
+            bundle install --path=${BUNDLE_PATH}
       - persist_to_workspace:
-          root: $WORKING_DIR
+          root: ${WORKING_DIR}
           paths:
-            - $BUNDLE_PATH
+            - ${BUNDLE_PATH}
   test:
     <<: *ruby_machine
     steps:
       - checkout
       - attach_workspace:
-          at: $WORKING_DIR
+          at: ${WORKING_DIR}
       - run:
           name: RSpec
           command: |
-            gem install bundler -v='$BUNDLER_VERSION'
+            gem install bundler -v='${BUNDLER_VERSION}'
             bundle exec rspec
 
 workflows:
