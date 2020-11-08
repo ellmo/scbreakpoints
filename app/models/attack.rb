@@ -4,11 +4,10 @@ class Attack
     @damage     = input_hash["damage"]
     @bonus      = input_hash["bonus"]   || 1
     @type       = input_hash["type"]    || "normal"
-    @strikes    = input_hash["strikes"] || 1
+    @strikes    = input_hash["attacks"] || 1
   end
 
   attr_reader :damage, :bonus, :type, :strikes
-
   alias attacks strikes
 
   def inspect
