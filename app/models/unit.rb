@@ -5,12 +5,13 @@ class Unit
   include Mongoid::Document
   field :race,      type: String
   field :name,      type: String
-  field :size,      type: String
+  field :size,      type: String,  default: "small"
+  field :flying,    type: Boolean, default: false
   field :slugs,     type: Array
 
   field :hitpoints, type: Integer
-  field :armor,     type: Integer
-  field :shields,   type: Integer
+  field :armor,     type: Integer, default: 0
+  field :shields,   type: Integer, default: 0
 
   field :attack,    type: Hash
 
