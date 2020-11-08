@@ -14,6 +14,8 @@ class Unit
 
   field :attack,    type: Hash
 
+  include AttackData
+
   def size_i
     SIZES.index size
   end
