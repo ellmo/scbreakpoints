@@ -1,34 +1,24 @@
 units:
   marine:
-    size: small
-    shields: 0
     hitpoints: 40
-    armor: 0
     attack:
       ground:
         damage: 6
-        type: normal
-        bonus: 1
-        attacks: 1
-      air:
-        damage: 6
-        type: normal
-        bonus: 1
-        attacks: 1
+      air: same
 
   vulture:
     size: medium
-    shields: 0
     hitpoints: 80
-    armor: 0
     attack:
       ground:
         damage: 20
         type: plasma
         bonus: 2
-        attacks: 1
 
   siege_tank_tank_mode:
+    slugs:
+      - siege_tank
+      - tank
     size: large
     shields: 0
     hitpoints: 150
@@ -38,11 +28,12 @@ units:
         damage: 30
         type: explosive
         bonus: 3
-        attacks: 1
 
   siege_tank_siege_mode:
+    slugs:
+      - siege
+      - sieged_tank
     size: large
-    shields: 0
     hitpoints: 150
     armor: 1
     attack:
@@ -50,4 +41,3 @@ units:
         damage: 70
         type: explosive
         bonus: 5
-        attacks: 1
