@@ -1,17 +1,16 @@
 units:
   zealot:
-    size: small
     shields: 60
     hitpoints: 100
     armor: 1
     attack:
       ground:
         damage: 8
-        type: normal
-        bonus: 1
         attacks: 2
 
   dragoon:
+    slugs:
+      - goon
     size: large
     shields: 80
     hitpoints: 100
@@ -21,11 +20,6 @@ units:
         damage: 20
         type: explosive
         bonus: 2
-        attacks: 1
-      air:
-        damage: 20
-        type: explosive
-        bonus: 2
-        attacks: 1
+      air: same
 
 
