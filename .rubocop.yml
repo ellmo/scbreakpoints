@@ -19,25 +19,29 @@ Metrics/BlockLength:
     - 'spec/**/*'
 
 # LAYOUT
+Layout/AccessModifierIndentation:
+  Enabled: false
+Layout/CommentIndentation:
+  Enabled: false
 Layout/DotPosition:
   EnforcedStyle: leading
   Enabled: true
 Layout/ExtraSpacing:
-  Enabled: false
-Layout/SpaceAroundOperators:
   Enabled: false
 Layout/EmptyLinesAroundClassBody:
   Enabled: false
 Layout/HashAlignment:
   EnforcedHashRocketStyle: separator
   EnforcedColonStyle: table
+Layout/SpaceAroundOperators:
+  Enabled: false
 
 # STYLE
 Style/ClassAndModuleChildren:
   Enabled: false
-Style/StringLiterals:
-  EnforcedStyle: double_quotes
-Style/FrozenStringLiteralComment:
-  Enabled: false
 Style/Documentation:
   Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
