@@ -1,15 +1,15 @@
 ul.tabs.race-selector#their-race-tabs data-tabs=""
-  li.tabs-title.is-active
-    a.terran href="#their-terran" aria-selected="true"
-  li.tabs-title
-    a.protoss href="#their-protoss"
-  li.tabs-title
-    a.zerg href="#their-zerg"
+  li.tabs-title class=active_element?("terran", theirs)
+    a.terran href="#their-terran" aria-selected=race_selected?("terran", theirs)
+  li.tabs-title class=active_element?("zerg", theirs)
+    a.zerg href="#their-zerg" aria-selected=race_selected?("zerg", theirs)
+  li.tabs-title class=active_element?("protoss", theirs)
+    a.protoss href="#their-protoss" aria-selected=race_selected?("protoss", theirs)
 
 .tabs-content.race-tab data-tabs-content="their-race-tabs"
-  .tabs-panel.is-active#their-terran
+  .tabs-panel#their-terran class=active_element?("terran", theirs)
     p HUMAN
-  .tabs-panel#their-protoss
-    p PROTOSZ
-  .tabs-panel#their-zerg
+  .tabs-panel#their-zerg class=active_element?("zerg", theirs)
     p DJERG
+  .tabs-panel#their-protoss class=active_element?("protoss", theirs)
+    p PROTOSZ
