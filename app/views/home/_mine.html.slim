@@ -1,10 +1,7 @@
 ul.tabs.race-selector#my-race-tabs data-tabs=""
-  li.tabs-title class=active_element?("terran", mine)
-    a.terran href="#my-terran" aria-selected=race_selected?("terran", mine)
-  li.tabs-title class=active_element?("zerg", mine)
-    a.zerg href="#my-zerg" aria-selected=race_selected?("zerg", mine)
-  li.tabs-title class=active_element?("protoss", mine)
-    a.protoss href="#my-protoss" aria-selected=race_selected?("protoss", mine)
+  = race_selector("terran", mine: mine)
+  = race_selector("zerg", mine: mine)
+  = race_selector("protoss", mine: mine)
 
 .tabs-content.race-tab data-tabs-content="my-race-tabs"
   .tabs-panel#my-terran class=active_element?("terran", mine)
