@@ -22,6 +22,16 @@ describe Calculator::StrikeCountService do
     end
   end
 
+  context "pure Hydra vs. pure SCV" do
+    let(:arguments) do
+      { unit: "hydra", target: "scv" }
+    end
+
+    it "returns 12 strikes" do
+      expect(subject.success).to eq 12
+    end
+  end
+
   context "pure Zealot vs. [0/3] Ling" do
     let(:arguments) do
       { unit: "zealot", target: "zergling", bonus_armor: 3 }

@@ -8,5 +8,3 @@ namespace :fixtures do
     File.open(DUMP_PATH, "wb") { |f| f.write(Marshal.dump(result.success)) }
   end
 end
-
-

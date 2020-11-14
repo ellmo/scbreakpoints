@@ -14,8 +14,8 @@ class Calculator::StrikeCountService < BaseService
   def_delegators :target, :hitpoints, :shields
 
   pipe :fetch_data do
-    bump(:unit)   { Unit.find_by name: unit }
-    bump(:target) { Unit.find_by name: target }
+    bump(:unit)   { Unit.find unit }
+    bump(:target) { Unit.find target }
   end
 
   pipe :shield_strikes_and_carryover do

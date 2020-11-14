@@ -1,4 +1,10 @@
 units:
+  scv:
+    hitpoints: 60
+    attack:
+      ground:
+        damage: 5
+
   marine:
     hitpoints: 40
     attack:
