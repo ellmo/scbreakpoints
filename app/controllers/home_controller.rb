@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  before_action :tvt_failsafe
+
   def index
     render locals: { mine: mine, theirs: theirs }
   end
@@ -19,5 +21,11 @@ private
 
   def record_for(slug)
     Unit.find(slug) || Race.find(slug)
+  end
+
+  def tvt_failsafe
+    return if mine && theirs
+
+    redirect_to "/terran/terran"
   end
 end
