@@ -28,4 +28,33 @@ class Array
 
     results.map { |x| x / base } if return_result
   end
+
+  def each_period(maximum, return_result = false)
+    raise ArgumentError, "All elements need to be Numeric." \
+      if reject { |x| x.is_a? Numeric }.present?
+
+    results = []
+
+    each do |factor|
+      current_highest = 0
+      index = 0
+      while current_highest < maximum
+        multiple = (factor * index).round 3
+        results << multiple.to_f
+
+        index += 1
+        current_highest = multiple
+      end
+    end
+
+    results = results.uniq.sort
+
+    if block_given?
+      results.each do |element|
+        yield element, self.select { |x| (element % x).zero? }
+      end
+    end
+
+    results.map { |x| x } if return_result
+  end
 end
