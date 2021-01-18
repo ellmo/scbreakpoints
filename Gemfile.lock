@@ -63,6 +63,7 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
+    benchmark-ips (2.8.4)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
     bson (4.11.1)
@@ -280,6 +281,7 @@ PLATFORMS
 
 DEPENDENCIES
   autoprefixer-rails
+  benchmark-ips
   bootsnap (>= 1.4.2)
   foundation-rails
   jbuilder (~> 2.7)
