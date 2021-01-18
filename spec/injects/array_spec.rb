@@ -1,4 +1,5 @@
 require "rails_helper"
+require "benchmark/ips"
 
 describe Array do
   describe "#each_multiple" do
@@ -30,6 +31,15 @@ describe Array do
           subject
         end
       end
+    end
+  end
+
+  describe "comparative benchmark" do
+    Benchmark.ips do |bench|
+      bench.report("BigDecimal") { [BigDecimal("1.25"), BigDecimal("2.18")].each_period(1000) }
+      bench.report("Float") { [1.25, 2.18].each_multiple(1000) }
+
+      bench.compare!
     end
   end
 end
