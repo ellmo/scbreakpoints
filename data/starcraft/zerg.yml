@@ -6,6 +6,7 @@ units:
     attack:
       ground:
         damage: 5
+        cooldown: 336
 
   hydralisk:
     slugs:

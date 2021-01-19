@@ -27,6 +27,10 @@ module AttackData
     target.flying ? attack_air : attack
   end
 
+  def strikes_vs(target)
+    @strikes_vs ||= attack_vs(target).cooldown.multiples2
+  end
+
   def coefficient_vs(target)
     return nil if attack_vs(target).nil?
     return 1.0 if attack_vs(target).normal?

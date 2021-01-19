@@ -7,6 +7,7 @@ units:
       ground:
         damage: 8
         attacks: 2
+        cooldown: 924
 
   dragoon:
     slugs:
@@ -20,6 +21,7 @@ units:
         damage: 20
         type: explosive
         bonus: 2
+        cooldown: 1260
       air: same
 
 

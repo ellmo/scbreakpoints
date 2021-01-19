@@ -27,16 +27,30 @@ class Unit
 #= METHODS
 #========
   include AttackData
+  include RegenData
 
   def self.find(slug)
     Unit.find_by slugs: slug
   end
+
   def size_i
     SIZES.index size
   end
 
   def type_i
     TYPES.index attack["ground"]["type"]
+  end
+
+  def protoss?
+    race == "protoss"
+  end
+
+  def terran?
+    race == "terran"
+  end
+
+  def zerg?
+    race == "zerg"
   end
 
 private
