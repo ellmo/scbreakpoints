@@ -1,7 +1,7 @@
 class SimulationService < BaseService
   attribute :red,     Types.Instance(Unit)
   attribute :blue,    Types.Instance(Unit)
-  attribute :rreport, Types::Strict::Bool.default(false)
+  attribute :report, Types::Strict::Bool.default(false)
 
   pipe :target_each_other do
     red.target!(blue)
@@ -23,8 +23,14 @@ class SimulationService < BaseService
 
   pipe :reverse_merge_cooldown_tables do
     last_result.each_with_object({}) do |(color, table), hsh|
-      table[:strikes].each { |timestamp| hsh[timestamp] = "#{color}_strike" }
-      table[:heals].each   { |timestamp| hsh[timestamp] = "#{color}_heal" }
+      table[:strikes].each do |timestamp|
+        hsh[timestamp] ||= []
+        hsh[timestamp] << "#{color}_strike"
+      end
+      table[:heals].each do |timestamp|
+        hsh[timestamp] ||= []
+        hsh[timestamp] << "#{color}_heal"
+      end
     end
   end
 
@@ -34,21 +40,23 @@ class SimulationService < BaseService
     last_result.keys.sort.each do |key|
       break if red.dead? || blue.dead?
 
-      case last_result[key]
-      when "red_strike"
-        red.attack.strikes.times { red.strike! }
-        red_strikes += 1
-        # puts blue.report_health(:blue)
-      when "blue_strike"
-        blue.attack.strikes.times { blue.strike! }
-        blue_strikes += 1
-        # puts red.report_health(:red)
-      when "red_heal"
-        red.heal!
-        # puts red.report_health(:red)
-      when "blue_heal"
-        blue.heal!
-        # puts blue.report_health(:blue)
+      last_result[key].each do |event|
+        case event
+        when "red_strike"
+          red.attack.strikes.times { red.strike! }
+          red_strikes += 1
+          puts blue.report_health(:blue) if report
+        when "blue_strike"
+          blue.attack.strikes.times { blue.strike! }
+          blue_strikes += 1
+          puts red.report_health(:red) if report
+        when "red_heal"
+          red.heal!
+          puts red.report_health(:red) if report
+        when "blue_heal"
+          blue.heal!
+          puts blue.report_health(:blue) if report
+        end
       end
     end
 
@@ -60,4 +68,7 @@ class SimulationService < BaseService
       end
     end
   end
+
+  # def report(timestamp, side)
+  # end
 end
