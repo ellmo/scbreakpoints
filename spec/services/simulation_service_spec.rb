@@ -1,4 +1,5 @@
 require "rails_helper"
+require "benchmark/ips"
 
 describe SimulationService do
   subject { service.call }
@@ -18,6 +19,20 @@ describe SimulationService do
 
     it "is a success" do
       expect(subject).to be_success
+    end
+
+    it "Zealot wins in 4 vs a gazzilion of attacks" do
+      expect(subject.success).to eq "zealot wins with 3 strikes against 7"
+    end
+
+    describe "benchmark" do
+      it do
+        Benchmark.ips do |bench|
+          bench.report("Ling vs Zealot") { subject }
+
+          # bench.compare!
+        end
+      end
     end
   end
 end

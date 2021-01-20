@@ -38,17 +38,17 @@ class SimulationService < BaseService
       when "red_strike"
         red.attack.strikes.times { red.strike! }
         red_strikes += 1
-        puts blue.report_health(:blue)
+        # puts blue.report_health(:blue)
       when "blue_strike"
         blue.attack.strikes.times { blue.strike! }
         blue_strikes += 1
-        puts red.report_health(:red)
+        # puts red.report_health(:red)
       when "red_heal"
         red.heal!
-        puts red.report_health(:red)
+        # puts red.report_health(:red)
       when "blue_heal"
         blue.heal!
-        puts blue.report_health(:blue)
+        # puts blue.report_health(:blue)
       end
     end
 
