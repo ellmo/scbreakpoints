@@ -3,11 +3,11 @@ module HealthData
   SHIELD_REGEN_COOLDOWN = 1536
 
   REPORT_W_SHIELDS =
-    "%<name>-20s %<shield_cur>3s/%<shield_max>-3s | %<hp_cur>3s/%<hp_max>-3s".freeze
+    "%<name>-30s %<shield_cur>3s/%<shield_max>-3s | %<hp_cur>3s/%<hp_max>-3s".freeze
   REPORT_HITPOINTS =
-    "%<name>-28s | %<hp_cur>3s/%<hp_max>-3s".freeze
+    "%<name>-38s | %<hp_cur>3s/%<hp_max>-3s".freeze
   REPORT_DEAD =
-    "%<name>-28s | >>DEAD<<".freeze
+    "%<name>-38s | >>DEAD<<".freeze
 
   extend ActiveSupport::Concern
 
