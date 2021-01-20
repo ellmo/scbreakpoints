@@ -2,6 +2,13 @@ module HealthData
   ZERG_REGEN_COOLDOWN   = 2688
   SHIELD_REGEN_COOLDOWN = 1536
 
+  REPORT_W_SHIELDS =
+    "%<name>-20s %<shield_cur>3s/%<shield_max>-3s | %<hp_cur>3s/%<hp_max>-3s".freeze
+  REPORT_HITPOINTS =
+    "%<name>-28s | %<hp_cur>3s/%<hp_max>-3s".freeze
+  REPORT_DEAD =
+    "%<name>-28s | >>DEAD<<".freeze
+
   extend ActiveSupport::Concern
 
   def dead?
@@ -9,7 +16,7 @@ module HealthData
   end
 
   def shields?
-    current_shield >=  0
+    current_shield.positive?
   end
 
   def regen
@@ -36,27 +43,20 @@ module HealthData
         remaining_damage = attack.damage - current_shield
 
         @current_shield = 0
-        @current_hp -= remaining_damage * coefficient
+        @current_hp -= (remaining_damage * coefficient).round
       end
     else
-      @current_hp -= attack.damage * coefficient
+      @current_hp -= (attack.damage * coefficient).round
     end
   end
 
-  def report_health
-    if protoss?
-      format(
-        "%<name>-20s %<shield_cur>3d/%<shield_max>-3d | %<hp_cur>3d/%<hp_max>-3d",
-        {
-          name: name, shield_cur: current_shield, shield_max: shields,
-          hp_cur: current_hp, hp_max: hitpoints
-        }
-      )
+  def report_health(unit_color)
+    if dead?
+      report_dead(unit_color)
+    elsif protoss?
+      report_w_shields(unit_color)
     else
-      format(
-        "%<name>-28s | %<hp_cur>3d/%<hp_max>-3d",
-        { name: name, hp_cur: current_hp, hp_max: hitpoints }
-      )
+      report_hitpoints(unit_color)
     end
   end
 
@@ -69,4 +69,29 @@ private
   def shield_missing?
     current_shield < shields
   end
+
+  def report_dead(unit_color)
+    format(REPORT_DEAD, name: "[#{name.color(unit_color)}]")
+  end
+
+  def report_w_shields(unit_color)
+    format(
+      REPORT_W_SHIELDS,
+      {
+        name: "[#{name.color(unit_color)}]", shield_cur: current_shield.color(:cyan),
+        shield_max: shields.color(:cyan), hp_cur: current_hp.color(:red),
+        hp_max: hitpoints.color(:red)
+      }
+    )
+  end
+
+  def report_hitpoints(unit_color)
+    format(
+      REPORT_HITPOINTS,
+      { name: "[#{name.color(unit_color)}]", hp_cur: current_hp.color(:red),
+        hp_max: hitpoints.color(:red) }
+    )
+  end
 end
+
+[siege_tank_tank_mode]
