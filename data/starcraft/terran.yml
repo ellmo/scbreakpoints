@@ -34,6 +34,7 @@ units:
         damage: 30
         type: explosive
         bonus: 3
+        cooldown: 1554
 
   siege_tank_siege_mode:
     slugs:
@@ -47,3 +48,4 @@ units:
         damage: 70
         type: explosive
         bonus: 5
+        cooldown: 3150
