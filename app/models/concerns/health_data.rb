@@ -93,5 +93,3 @@ private
     )
   end
 end
-
-[siege_tank_tank_mode]
