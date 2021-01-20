@@ -1,8 +1,8 @@
 require "rails_helper"
 
 describe Unit, type: :model do
-  describe "#coefficient_vs" do
-    subject { unit.coefficient_vs target }
+  describe "#coefficient" do
+    subject { unit.coefficient target }
 
     context "zealot attacks zergling" do
       let(:unit)   { Unit.find "zealot" }

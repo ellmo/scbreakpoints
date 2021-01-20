@@ -5,36 +5,50 @@ module AttackData
 
   extend ActiveSupport::Concern
 
-  def attack
-    @attack ||= Attack.new(attributes["attack"]["ground"])
+  included do
+    attr_reader :target
   end
 
-  def attack_air
-    @attack_air ||= case attributes["attack"]["air"]
+  def target!(target_unit)
+    @target = target_unit
+  end
+
+  def attack
+    raise ArgumentError unless target.is_a? Unit
+
+    @attack ||= target.flying ? attack_air : ground_attack
+  end
+
+  def coefficient
+    return nil if attack.nil?
+    return 1.0 if attack.normal? || target.shields?
+
+    @coefficient = COEFF_MATRIX[DMG_TYPES.index(attack.type)][SIZES.index(target.size)]
+  end
+
+  def strikes
+    @strikes ||= attack.cooldown.multiples2
+  end
+
+  def strike!
+    target.harm!(attack, coefficient)
+  end
+
+private
+
+  def ground_attack
+    @ground_attack ||= Attack.new(attributes["attack"]["ground"])
+  end
+
+  def air_attack
+    @air_attack ||= case attributes["attack"]["air"]
                     when nil
                       nil
                     when "same"
-                      attack
+                      ground_attack
                     else
                       Attack.new(attributes["attack"]["air"])
                     end
   end
-  alias air_attack attack_air
-
-  def attack_vs(target)
-    raise ArgumentError unless target.is_a? Unit
-
-    target.flying ? attack_air : attack
-  end
-
-  def strikes_vs(target)
-    @strikes_vs ||= attack_vs(target).cooldown.multiples2
-  end
-
-  def coefficient_vs(target)
-    return nil if attack_vs(target).nil?
-    return 1.0 if attack_vs(target).normal?
-
-    COEFF_MATRIX[DMG_TYPES.index(attack_vs(target).type)][SIZES.index(target.size)]
-  end
+  alias attack_air air_attack
 end

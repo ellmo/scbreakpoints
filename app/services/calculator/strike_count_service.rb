@@ -36,7 +36,7 @@ class Calculator::StrikeCountService < BaseService
   end
 
   def coefficient
-    @coefficient ||= unit.coefficient_vs(target)
+    @coefficient ||= unit.coefficient(target)
   end
 
   def attack

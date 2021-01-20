@@ -1,11 +1,11 @@
 class Attack
   def initialize(input_hash)
-    @input_hash = input_hash
-    @damage     = input_hash["damage"]
-    @bonus      = input_hash["bonus"]   || 1
-    @type       = input_hash["type"]    || "normal"
-    @strikes    = input_hash["attacks"] || 1
-    @cooldown   = input_hash["cooldown"]|| 1000
+    @input_hash  = input_hash
+    @damage      = input_hash["damage"]
+    @bonus       = input_hash["bonus"]   || 1
+    @type        = input_hash["type"]    || "normal"
+    @strikes     = input_hash["attacks"] || 1
+    @cooldown    = input_hash["cooldown"]|| 1000
   end
 
   attr_reader :damage, :bonus, :type, :strikes, :cooldown

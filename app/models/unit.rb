@@ -18,19 +18,27 @@ class Unit
 
   field :attack,    type: Hash
 
+  attr_reader :current_hp, :current_shield
+
 #============
 #= CALLBACKS
 #==========
   before_save :add_name_to_slugs, -> { slugs_changed? }
+  after_initialize :load_health
 
 #==========
 #= METHODS
 #========
   include AttackData
-  include RegenData
+  include HealthData
 
   def self.find(slug)
     Unit.find_by slugs: slug
+  end
+
+  def load_health
+    @current_hp     = hitpoints
+    @current_shield = shields
   end
 
   def size_i
