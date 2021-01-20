@@ -1,5 +1,7 @@
 class String
   COLOR_CODES = {
+    none:       0,
+    #------------#
     black:      30,
     red:        31,
     green:      32,
