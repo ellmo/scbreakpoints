@@ -36,18 +36,24 @@ module HealthData
   end
 
   def harm!(attack, coefficient = 1)
+    damage = nil
     if shields?
       if current_shield >= attack.damage
-        @current_shield -= attack.damage
+        damage = attack.damage
+        @current_shield -= damage
       else
         remaining_damage = attack.damage - current_shield
+        penetrate_damage = (remaining_damage * coefficient).round - armor
+        damage = @current_shield + penetrate_damage
 
         @current_shield = 0
-        @current_hp -= (remaining_damage * coefficient).round
+        @current_hp -= penetrate_damage
       end
     else
-      @current_hp -= (attack.damage * coefficient).round
+      damage = (attack.damage * coefficient).round - armor
+      @current_hp -= damage
     end
+    damage
   end
 
   def report_health(unit_color)
