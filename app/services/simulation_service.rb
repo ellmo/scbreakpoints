@@ -40,26 +40,43 @@ class SimulationService < BaseService
       break if red.dead? || blue.dead?
 
       last_result[timestamp].each do |event|
-        handle(timestamp, event)
+        report ? handle_with_report(timestamp, event) : handle(event)
       end
     end
 
     message do
       if red.dead?
-        "#{blue.name} wins with #{strikes[:blue]} strikes against #{strikes[:red]}"
+        "#{blue.label} wins, with #{strikes[:blue]} strikes against #{strikes[:red]}."
       else
-        "#{red.name} wins with #{strikes[:red]} strikes against #{strikes[:blue]}"
+        "#{red.label} wins, with #{strikes[:red]} strikes against #{strikes[:blue]}."
       end
     end
   end
 
-  def handle(timestamp, event)
+private
+
+  def handle(event)
     case event
     when "red_strike"
-      red.attack.strikes.times { report ? red.report_strike!(timestamp, :red) : red.strike! }
+      red.attack.strikes.times { red.strike! }
       strikes[:red] += 1
     when "blue_strike"
-      blue.attack.strikes.times { report ? blue.report_strike!(timestamp, :blue) : blue.strike! }
+      blue.attack.strikes.times { blue.strike! }
+      strikes[:blue] += 1
+    when "red_heal"
+      red.heal!
+    when "blue_heal"
+      blue.heal!
+    end
+  end
+
+  def handle_with_report(timestamp, event)
+    case event
+    when "red_strike"
+      red.attack.strikes.times { red.report_strike!(timestamp, :red) }
+      strikes[:red] += 1
+    when "blue_strike"
+      blue.attack.strikes.times { blue.report_strike!(timestamp, :blue) }
       strikes[:blue] += 1
     when "red_heal"
       red.heal!
