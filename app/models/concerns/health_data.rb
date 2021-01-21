@@ -1,6 +1,8 @@
 module HealthData
   ZERG_REGEN_COOLDOWN   = 2688
+  ZERG_REGEN_OFFSET     = 50
   SHIELD_REGEN_COOLDOWN = 1536
+  SHIELD_REGEN_OFFSET   = 1536
 
   REPORT_W_SHIELDS =
     "%<name>-30s %<shield_cur>3s/%<shield_max>-3s | %<hp_cur>3s/%<hp_max>-3s".freeze
@@ -21,9 +23,9 @@ module HealthData
 
   def regen
     @regen ||= if zerg?
-                 ZERG_REGEN_COOLDOWN.multiples2
+                 ZERG_REGEN_COOLDOWN.multiples(offset: ZERG_REGEN_OFFSET)
                elsif protoss?
-                 SHIELD_REGEN_COOLDOWN.multiples2
+                 SHIELD_REGEN_COOLDOWN.multiples(offset: SHIELD_REGEN_OFFSET)
                end
   end
 
