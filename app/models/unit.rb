@@ -20,7 +20,7 @@ class Unit
 
   field :attack,    type: Hash
 
-  attr_reader :current_hp, :current_shield
+  attr_reader :current_hp, :current_shields
 
 #============
 #= CALLBACKS
@@ -41,7 +41,7 @@ class Unit
 
   def load_health
     @current_hp     = hitpoints
-    @current_shield = shields
+    @current_shields = shields
   end
 
   def size_i

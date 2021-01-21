@@ -18,7 +18,7 @@ module HealthData
   end
 
   def shields?
-    current_shield.positive?
+    current_shields.positive?
   end
 
   def regen
@@ -33,22 +33,22 @@ module HealthData
     if zerg? && health_missing?
       @current_hp += value
     elsif protoss? && shield_missing?
-      @current_shield += value
+      @current_shields += value
     end
   end
 
   def harm!(attack, coefficient = 1)
     damage = nil
     if shields?
-      if current_shield >= attack.damage
+      if current_shields >= attack.damage
         damage = attack.damage
-        @current_shield -= damage
+        @current_shields -= damage
       else
-        remaining_damage = attack.damage - current_shield
+        remaining_damage = attack.damage - current_shields
         penetrate_damage = (remaining_damage * coefficient).round - armor
-        damage = @current_shield + penetrate_damage
+        damage = @current_shields + penetrate_damage
 
-        @current_shield = 0
+        @current_shields = 0
         @current_hp -= penetrate_damage
       end
     else
@@ -75,7 +75,7 @@ private
   end
 
   def shield_missing?
-    current_shield < shields
+    current_shields < shields
   end
 
   def report_dead(unit_color)
@@ -86,7 +86,7 @@ private
     format(
       REPORT_W_SHIELDS,
       {
-        name: "[#{name.color(unit_color)}]", shield_cur: current_shield.color(:cyan),
+        name: "[#{name.color(unit_color)}]", shield_cur: current_shields.color(:cyan),
         shield_max: shields.color(:cyan), hp_cur: current_hp.color(:red),
         hp_max: hitpoints.color(:red)
       }
