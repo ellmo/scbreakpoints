@@ -81,9 +81,9 @@ private
       red.attack.strikes.times { red.report_strike!(timestamp, :red) }
       strikes[:red] += 1
     when "blue_heal"
-      blue.heal!
+      blue.report_heal!(timestamp, :blue)
     when "red_heal"
-      red.heal!
+      red.report_heal!(timestamp, :red)
     end
   end
 end
