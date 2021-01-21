@@ -15,7 +15,7 @@ describe SimulationService do
   end
 
   context "Zergling vs Zealot" do
-    let(:arguments) { { red: Unit.find(:ling), blue: Unit.find(:zealot), report: true } }
+    let(:arguments) { { blue: Unit.find(:ling), red: Unit.find(:zealot), report: true } }
 
     it "is a success" do
       expect(subject).to be_success
@@ -27,7 +27,7 @@ describe SimulationService do
   end
 
   context "Goon vs Tank (T)" do
-    let(:arguments) { { red: Unit.find(:goon), blue: Unit.find(:tank), report: true } }
+    let(:arguments) { { blue: Unit.find(:goon), red: Unit.find(:tank), report: true } }
 
     it "is a success" do
       expect(subject).to be_success

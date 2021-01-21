@@ -1,23 +1,23 @@
 class SimulationService < BaseService
-  attribute :red,     Types.Instance(Unit)
   attribute :blue,    Types.Instance(Unit)
+  attribute :red,     Types.Instance(Unit)
   attribute :report,  Types::Strict::Bool.default(false)
-  attribute :strikes, Types::Strict::Hash.default({ red: 0, blue: 0 }, shared: true)
+  attribute :strikes, Types::Strict::Hash.default({ blue: 0, red: 0 }, shared: true)
 
   pipe :target_each_other do
-    red.target!(blue)
     blue.target!(red)
+    red.target!(blue)
   end
 
   pipe :generate_cooldown_tables do
     {
-      red:  {
-        strikes: red.strikes,
-        heals:   red.regen || []
-      },
       blue: {
         strikes: blue.strikes,
         heals:   blue.regen || []
+      },
+      red:  {
+        strikes: red.strikes,
+        heals:   red.regen || []
       }
     }
   end
@@ -39,7 +39,7 @@ class SimulationService < BaseService
     StdoutReporter.print_header
 
     last_result.keys.sort.each do |timestamp|
-      break if red.dead? || blue.dead?
+      break if blue.dead? || red.dead?
 
       last_result[timestamp].each do |event|
         report ? handle_with_report(timestamp, event) : handle(event)
@@ -47,10 +47,10 @@ class SimulationService < BaseService
     end
 
     message do
-      if red.dead?
-        "#{blue.label} wins, with #{strikes[:blue]} strikes against #{strikes[:red]}."
-      else
+      if blue.dead?
         "#{red.label} wins, with #{strikes[:red]} strikes against #{strikes[:blue]}."
+      else
+        "#{blue.label} wins, with #{strikes[:blue]} strikes against #{strikes[:red]}."
       end
     end
   end
@@ -59,31 +59,31 @@ private
 
   def handle(event)
     case event
-    when "red_strike"
-      red.attack.strikes.times { red.strike! }
-      strikes[:red] += 1
     when "blue_strike"
       blue.attack.strikes.times { blue.strike! }
       strikes[:blue] += 1
-    when "red_heal"
-      red.heal!
+    when "red_strike"
+      red.attack.strikes.times { red.strike! }
+      strikes[:red] += 1
     when "blue_heal"
       blue.heal!
+    when "red_heal"
+      red.heal!
     end
   end
 
   def handle_with_report(timestamp, event)
     case event
-    when "red_strike"
-      red.attack.strikes.times { red.report_strike!(timestamp, :red) }
-      strikes[:red] += 1
     when "blue_strike"
       blue.attack.strikes.times { blue.report_strike!(timestamp, :blue) }
       strikes[:blue] += 1
-    when "red_heal"
-      red.heal!
+    when "red_strike"
+      red.attack.strikes.times { red.report_strike!(timestamp, :red) }
+      strikes[:red] += 1
     when "blue_heal"
       blue.heal!
+    when "red_heal"
+      red.heal!
     end
   end
 end
