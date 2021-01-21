@@ -10,9 +10,9 @@ class StdoutReporter
     "\e[30m\e[42m HITPOINTS \e[0m\e[0m".freeze
 
   REPORT_BLUE =
-    "[%6d]:[%25s][%13s/%13s][%13s/%13s] %-19s [%-25s][%13s/%13s][%13s/%13s]".freeze
-  REPORT_RED =
     "[%6d]:[%25s][%13s/%13s][%13s/%13s] %19s [%-25s][%13s/%13s][%13s/%13s]".freeze
+  REPORT_RED =
+    "[%6d]:[%25s][%13s/%13s][%13s/%13s] %-19s [%-25s][%13s/%13s][%13s/%13s]".freeze
 
   def self.print_header
     puts HEADER

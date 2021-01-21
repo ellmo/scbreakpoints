@@ -61,10 +61,10 @@ module HealthData
     end
 
     if side == :red
-       StdoutReporter.report_red(self, timestamp, heal_value)
-     else
-       StdoutReporter.report_blue(self, timestamp, heal_value)
-     end
+      StdoutReporter.report_blue(target, timestamp, heal_value)
+    else
+      StdoutReporter.report_red(target, timestamp, heal_value)
+    end
   end
 
 private

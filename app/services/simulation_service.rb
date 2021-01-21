@@ -9,6 +9,10 @@ class SimulationService < BaseService
     red.target!(blue)
   end
 
+  pipe :reset_strikes do
+    bump(:strikes) { { blue: 0, red: 0 } }
+  end
+
   pipe :generate_cooldown_tables do
     {
       blue: {
