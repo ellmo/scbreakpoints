@@ -44,6 +44,7 @@ units:
       air: same
 
   guardian:
+    size: large
     slugs:
       - guard
     flying: true
@@ -55,4 +56,14 @@ units:
         bonus: 2
         cooldown: 1260
 
+  devourer:
+    size: large
+    flying: true
+    hitpoints: 250
+    armor: 2
+    attack:
+      ground:
+        damage: 25
+        bonus: 2
+        cooldown: 4200
 
