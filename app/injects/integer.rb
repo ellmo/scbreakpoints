@@ -1,5 +1,5 @@
 class Integer
-  def multiples(max: 10_000, from: 0, offset: 0)
+  def multiples(max: 100_000, from: 0, offset: 0)
     factor = from
     values = []
 
