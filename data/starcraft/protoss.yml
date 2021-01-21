@@ -24,4 +24,27 @@ units:
         cooldown: 1260
       air: same
 
+  dark_templar:
+    slugs:
+      - dt
+    shields: 80
+    hitpoints: 40
+    armor: 1
+    attack:
+      ground:
+        damage: 40
+        bonus: 3
+        cooldown: 1260
+
+  reaver:
+    size: large
+    shields: 100
+    hitpoints: 80
+    armor: 1
+    attack:
+      ground:
+        damage: 100
+        bonus: 25
+        cooldown: 2520
+
 

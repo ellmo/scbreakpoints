@@ -17,7 +17,20 @@ units:
       ground:
         damage: 10
         type: explosive
+        cooldown: 630
       air: same
+
+  ultralisk:
+    slugs:
+      - ultra
+    size: large
+    hitpoints: 400
+    armor: 1
+    attack:
+      ground:
+        damage: 20
+        bonus: 3
+        cooldown: 630
 
   mutalisk:
     slugs:
@@ -27,4 +40,19 @@ units:
     attack:
       ground:
         damage: 9
+        cooldown: 1260
       air: same
+
+  guardian:
+    slugs:
+      - guard
+    flying: true
+    hitpoints: 150
+    armor: 2
+    attack:
+      ground:
+        damage: 20
+        bonus: 2
+        cooldown: 1260
+
+
