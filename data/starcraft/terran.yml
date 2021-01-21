@@ -1,5 +1,6 @@
 units:
   scv:
+    label: "SCV"
     hitpoints: 60
     attack:
       ground:
@@ -22,6 +23,7 @@ units:
         bonus: 2
 
   siege_tank_tank_mode:
+    label: "Siege Tank (T)"
     slugs:
       - siege_tank
       - tank
@@ -37,6 +39,7 @@ units:
         cooldown: 1554
 
   siege_tank_siege_mode:
+    label: "Siege Tank (S)"
     slugs:
       - siege
       - sieged_tank

@@ -6,8 +6,10 @@ class Unit
 #= DOC
 #====
   include Mongoid::Document
+
   field :race,      type: String
   field :name,      type: String
+  field :label,     type: String
   field :size,      type: String,  default: "small"
   field :flying,    type: Boolean, default: false
   field :slugs,     type: Array
@@ -24,6 +26,7 @@ class Unit
 #= CALLBACKS
 #==========
   before_save :add_name_to_slugs, -> { slugs_changed? }
+  before_save :default_label, -> { name_changed? }
   after_initialize :load_health
 
 #==========
@@ -69,5 +72,9 @@ private
     else
       self.slugs = [name]
     end
+  end
+
+  def default_label
+    self.label ||= name.split("_").map(&:capitalize).join(" ")
   end
 end
