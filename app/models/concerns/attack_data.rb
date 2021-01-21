@@ -3,11 +3,6 @@ module AttackData
   SIZES        = %w[small medium large].freeze
   DMG_TYPES    = %w[explosive plasma].freeze
 
-  REPORT_TEMPLATE_RED =
-    "[%6d]:[%20s][%13s/%13s][%13s/%13s] ---{%3s}--> [%20s][%13s/%13s][%13s/%13s]".freeze
-  REPORT_TEMPLATE_BLU =
-    "[%6d]:[%20s][%13s/%13s][%13s/%13s] <--{%3s}--- [%20s][%13s/%13s][%13s/%13s]".freeze
-
   extend ActiveSupport::Concern
 
   included do
@@ -40,14 +35,13 @@ module AttackData
   end
 
   def report_strike!(timestamp, side)
-    damage_done = target.harm!(attack, coefficient)
+    damage_done = "-#{target.harm!(attack, coefficient)}".color(:brown)
 
-    report = if side == :red
-               format(REPORT_TEMPLATE_RED, timestamp, *red_report_values(damage_done))
-             else
-               format(REPORT_TEMPLATE_BLU, timestamp, *blue_report_values(damage_done))
-             end
-    puts report
+    if side == :red
+      StdoutReporter.report_red(self, timestamp, damage_done)
+    else
+      StdoutReporter.report_blue(self, timestamp, damage_done)
+    end
   end
 
 private
@@ -67,36 +61,4 @@ private
                     end
   end
   alias attack_air air_attack
-
-  def red_report_values(damage_done)
-    [
-      label.color(:red),
-      current_shields.color(:cyan),
-      shields.color(:cyan),
-      current_hp.color(:green),
-      hitpoints.color(:green),
-      damage_done.color(:brown),
-      target.label.color(:blue),
-      target.current_shields.color(:cyan),
-      target.shields.color(:cyan),
-      target.current_hp.color(:green),
-      target.hitpoints.color(:green)
-    ]
-  end
-
-  def blue_report_values(damage_done)
-    [
-      target.label.color(:red),
-      target.current_shields.color(:cyan),
-      target.shields.color(:cyan),
-      target.current_hp.color(:green),
-      target.hitpoints.color(:green),
-      damage_done.color(:brown),
-      label.color(:blue),
-      current_shields.color(:cyan),
-      shields.color(:cyan),
-      current_hp.color(:green),
-      hitpoints.color(:green)
-    ]
-  end
 end

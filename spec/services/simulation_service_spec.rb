@@ -26,7 +26,7 @@ describe SimulationService do
     end
   end
 
-  context "Goon vs Tank (tank mode)" do
+  context "Goon vs Tank (T)" do
     let(:arguments) { { red: Unit.find(:goon), blue: Unit.find(:tank), report: true } }
 
     it "is a success" do

@@ -4,13 +4,6 @@ module HealthData
   SHIELD_REGEN_COOLDOWN = 1536
   SHIELD_REGEN_OFFSET   = 1536
 
-  REPORT_W_SHIELDS =
-    "%<name>-30s %<shield_cur>3s/%<shield_max>-3s | %<hp_cur>3s/%<hp_max>-3s".freeze
-  REPORT_HITPOINTS =
-    "%<name>-38s | %<hp_cur>3s/%<hp_max>-3s".freeze
-  REPORT_DEAD =
-    "%<name>-38s | >>DEAD<<".freeze
-
   extend ActiveSupport::Concern
 
   def dead?
@@ -27,14 +20,6 @@ module HealthData
                elsif protoss?
                  SHIELD_REGEN_COOLDOWN.multiples(offset: SHIELD_REGEN_OFFSET)
                end
-  end
-
-  def heal!(value = 1)
-    if zerg? && health_missing?
-      @current_hp += value
-    elsif protoss? && shield_missing?
-      @current_shields += value
-    end
   end
 
   def harm!(attack, coefficient = 1)
@@ -58,14 +43,28 @@ module HealthData
     damage
   end
 
-  def report_health(unit_color)
-    if dead?
-      report_dead(unit_color)
-    elsif protoss?
-      report_w_shields(unit_color)
-    else
-      report_hitpoints(unit_color)
+  def heal!(value = 1)
+    if zerg? && health_missing?
+      @current_hp += value
+    elsif protoss? && shield_missing?
+      @current_shields += value
     end
+  end
+
+  def report_heal!(timestamp, side, heal_value = 1)
+    if zerg? && health_missing?
+      @current_hp += heal_value
+      heal_value = "+#{heal_value}".color(:green)
+    elsif protoss? && shield_missing?
+      @current_shields += heal_value
+      heal_value = "+#{heal_value}".color(:cyan)
+    end
+
+    if side == :red
+       StdoutReporter.report_red(self, timestamp, heal_value)
+     else
+       StdoutReporter.report_blue(self, timestamp, heal_value)
+     end
   end
 
 private
@@ -78,26 +77,7 @@ private
     current_shields < shields
   end
 
-  def report_dead(unit_color)
-    format(REPORT_DEAD, name: "[#{name.color(unit_color)}]")
-  end
-
-  def report_w_shields(unit_color)
-    format(
-      REPORT_W_SHIELDS,
-      {
-        name: "[#{name.color(unit_color)}]", shield_cur: current_shields.color(:cyan),
-        shield_max: shields.color(:cyan), hp_cur: current_hp.color(:red),
-        hp_max: hitpoints.color(:red)
-      }
-    )
-  end
-
-  def report_hitpoints(unit_color)
-    format(
-      REPORT_HITPOINTS,
-      { name: "[#{name.color(unit_color)}]", hp_cur: current_hp.color(:red),
-        hp_max: hitpoints.color(:red) }
-    )
-  end
+  # def report_dead(unit_color)
+  #   format(REPORT_DEAD, name: "[#{name.color(unit_color)}]")
+  # end
 end
