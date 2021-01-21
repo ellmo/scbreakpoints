@@ -21,7 +21,7 @@ module AttackData
 
   def coefficient
     return nil if attack.nil?
-    return 1.0 if attack.normal? || target.shields?
+    return 1.0 if attack.normal?
 
     @coefficient = COEFF_MATRIX[DMG_TYPES.index(attack.type)][SIZES.index(target.size)]
   end

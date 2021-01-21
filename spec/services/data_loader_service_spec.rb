@@ -13,7 +13,7 @@ describe DataLoaderService do
   end
 
   context "response content" do
-    let(:expected) { Marshal.load(File.read(dump_path)) } # rubocop:disable Security/MarshalLoad}
+    let(:expected) { Marshal.load(File.read(dump_path)) } # rubocop:disable Security/MarshalLoad
 
     it "loaded data equals dump" do
       expect(subject.success).to eq expected

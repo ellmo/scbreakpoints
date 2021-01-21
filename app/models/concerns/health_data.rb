@@ -22,7 +22,7 @@ module HealthData
                end
   end
 
-  def harm!(attack, coefficient = 1)
+  def harm!(attack, coefficient = 1) # rubocop:disable Metrics/MethodLength
     damage = nil
     if shields?
       if current_shields >= attack.damage
@@ -51,7 +51,7 @@ module HealthData
     end
   end
 
-  def report_heal!(timestamp, side, heal_value = 1)
+  def report_heal!(timestamp, side, heal_value = 1) # rubocop:disable Metrics/PerceivedComplexity
     if zerg? && health_missing?
       @current_hp += heal_value
       heal_value = "+#{heal_value}".color(:green)
@@ -76,8 +76,4 @@ private
   def shield_missing?
     current_shields < shields
   end
-
-  # def report_dead(unit_color)
-  #   format(REPORT_DEAD, name: "[#{name.color(unit_color)}]")
-  # end
 end
