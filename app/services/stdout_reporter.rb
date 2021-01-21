@@ -1,13 +1,13 @@
 class StdoutReporter
   HEADER =
-    "\e[30m\e[47mtimestamp\e[0m\e[0m" \
-    "\e[30m\e[44m        BLUE UNIT \e[0m\e[0m" \
-    "\e[30m\e[46m  SHIELDS  \e[0m\e[0m" \
-    "\e[30m\e[42m HITPOINTS \e[0m\e[0m" \
-    "\e[31m\e[43m   ACTION   \e[0m\e[0m" \
-    "\e[30m\e[41m RED UNIT         \e[0m\e[0m" \
-    "\e[30m\e[46m  SHIELDS  \e[0m\e[0m" \
-    "\e[30m\e[42m HITPOINTS \e[0m\e[0m".freeze
+    "\e[30m\e[47mtimestamp\e[0m" \
+    "\e[30m\e[44m        BLUE UNIT \e[0m" \
+    "\e[30m\e[46m  SHIELDS  \e[0m" \
+    "\e[30m\e[42m HITPOINTS \e[0m" \
+    "\e[33m\e[45m\e[1m   ACTION   \e[0m" \
+    "\e[30m\e[41m RED UNIT         \e[0m" \
+    "\e[30m\e[46m  SHIELDS  \e[0m" \
+    "\e[30m\e[42m HITPOINTS \e[0m".freeze
 
   REPORT_BLUE =
     "[%6d]:[%25s][%13s/%13s][%13s/%13s] %19s [%-25s][%13s/%13s][%13s/%13s]".freeze
