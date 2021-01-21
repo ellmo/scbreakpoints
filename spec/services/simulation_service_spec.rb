@@ -15,14 +15,14 @@ describe SimulationService do
   end
 
   context "Zergling vs Zealot" do
-    let(:arguments) { { red: Unit.find(:ling), blue: Unit.find(:zealot) } }
+    let(:arguments) { { red: Unit.find(:ling), blue: Unit.find(:zealot), report: true } }
 
     it "is a success" do
       expect(subject).to be_success
     end
 
-    it "Zealot wins in 4 vs 7 strikes" do
-      expect(subject.success).to eq "zealot wins with 3 strikes against 7"
+    it "Zealot wins in 3 vs 6 strikes" do
+      expect(subject.success).to eq "zealot wins with 3 strikes against 6"
     end
   end
 

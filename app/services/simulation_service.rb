@@ -1,7 +1,8 @@
 class SimulationService < BaseService
   attribute :red,     Types.Instance(Unit)
   attribute :blue,    Types.Instance(Unit)
-  attribute :report, Types::Strict::Bool.default(false)
+  attribute :report,  Types::Strict::Bool.default(false)
+  attribute :strikes, Types::Strict::Hash.default({ red: 0, blue: 0 }, shared: true)
 
   pipe :target_each_other do
     red.target!(blue)
@@ -35,40 +36,35 @@ class SimulationService < BaseService
   end
 
   pipe :traverse_timestamps do
-    red_strikes = blue_strikes = 0
-
-    last_result.keys.sort.each do |key|
+    last_result.keys.sort.each do |timestamp|
       break if red.dead? || blue.dead?
 
-      last_result[key].each do |event|
-        case event
-        when "red_strike"
-          red.attack.strikes.times { red.strike! }
-          red_strikes += 1
-          puts blue.report_health(:blue) if report
-        when "blue_strike"
-          blue.attack.strikes.times { blue.strike! }
-          blue_strikes += 1
-          puts red.report_health(:red) if report
-        when "red_heal"
-          red.heal!
-          puts red.report_health(:red) if report
-        when "blue_heal"
-          blue.heal!
-          puts blue.report_health(:blue) if report
-        end
+      last_result[timestamp].each do |event|
+        handle(timestamp, event)
       end
     end
 
     message do
       if red.dead?
-        "#{blue.name} wins with #{blue_strikes} strikes against #{red_strikes}"
+        "#{blue.name} wins with #{strikes[:blue]} strikes against #{strikes[:red]}"
       else
-        "#{red.name} wins with #{red_strikes} strikes against #{blue_strikes}"
+        "#{red.name} wins with #{strikes[:red]} strikes against #{strikes[:blue]}"
       end
     end
   end
 
-  # def report(timestamp, side)
-  # end
+  def handle(timestamp, event)
+    case event
+    when "red_strike"
+      red.attack.strikes.times { report ? red.report_strike!(timestamp, :red) : red.strike! }
+      strikes[:red] += 1
+    when "blue_strike"
+      blue.attack.strikes.times { report ? blue.report_strike!(timestamp, :blue) : blue.strike! }
+      strikes[:blue] += 1
+    when "red_heal"
+      red.heal!
+    when "blue_heal"
+      blue.heal!
+    end
+  end
 end
