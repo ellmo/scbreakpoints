@@ -1,4 +1,11 @@
 units:
+  overlord:
+    slugs:
+      - ovie
+      - lord
+      - over
+    hitpoints: 200
+
   zergling:
     slugs:
       - ling
@@ -66,4 +73,3 @@ units:
         damage: 25
         bonus: 2
         cooldown: 4200
-

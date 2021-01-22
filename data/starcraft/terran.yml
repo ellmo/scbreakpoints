@@ -5,12 +5,14 @@ units:
     attack:
       ground:
         damage: 5
+        cooldown:
 
   marine:
     hitpoints: 40
     attack:
       ground:
         damage: 6
+        cooldown: 630
       air: same
 
   firebat:
@@ -41,6 +43,7 @@ units:
         damage: 20
         type: plasma
         bonus: 2
+        cooldown: 1260
 
   siege_tank_tank_mode:
     label: "Siege Tank (T)"

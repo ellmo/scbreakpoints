@@ -27,8 +27,8 @@ units:
   dark_templar:
     slugs:
       - dt
-    shields: 80
-    hitpoints: 40
+    shields: 40
+    hitpoints: 80
     armor: 1
     attack:
       ground:
@@ -38,13 +38,23 @@ units:
 
   reaver:
     size: large
-    shields: 100
-    hitpoints: 80
-    armor: 1
+    shields: 80
+    hitpoints: 100
     attack:
       ground:
         damage: 100
         bonus: 25
         cooldown: 2520
 
+  corsair:
+    size: medium
+    flying: true
+    shields: 80
+    hitpoints: 100
+    armor: 1
+    attack:
+      air:
+        damage: 5
+        type: explosive
+        cooldown: 336
 
