@@ -52,13 +52,15 @@ module HealthData
   end
 
   def report_heal!(timestamp, side, heal_value = 1) # rubocop:disable Metrics/PerceivedComplexity
-    if zerg? && health_missing?
-      @current_hp += heal_value
-      heal_value = "+#{heal_value}".color(:green)
-    elsif protoss? && shield_missing?
-      @current_shields += heal_value
-      heal_value = "+#{heal_value}".color(:cyan)
-    end
+    healed = if zerg? && health_missing?
+               @current_hp += heal_value
+               heal_value = "+#{heal_value}".color(:green)
+             elsif protoss? && shield_missing?
+               @current_shields += heal_value
+               heal_value = "+#{heal_value}".color(:cyan)
+             end
+
+    return unless healed
 
     if side == :red
       StdoutReporter.report_blue(target, timestamp, heal_value)
