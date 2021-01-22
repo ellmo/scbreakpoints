@@ -40,7 +40,7 @@ class SimulationService < BaseService
   end
 
   pipe :traverse_timestamps do
-    StdoutReporter.print_header
+    StdoutReporter.print_header if report
 
     last_result.keys.sort.each do |timestamp|
       break if blue.dead? || red.dead?
