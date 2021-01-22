@@ -27,6 +27,8 @@ module AttackData
   end
 
   def strikes
+    return [] unless attack
+
     @strikes ||= attack.cooldown.multiples
   end
 
@@ -47,17 +49,18 @@ module AttackData
 private
 
   def ground_attack
-    @ground_attack ||= Attack.new(attributes["attack"]["ground"])
+    attack_attributes = attributes.dig("attack", "ground")
+    @ground_attack ||= attack_attributes ? Attack.new(attack_attributes) : nil
   end
 
   def air_attack
-    @air_attack ||= case attributes["attack"]["air"]
+    @air_attack ||= case attack_attributes = attributes.dig("attack", "air")
                     when nil
                       nil
                     when "same"
                       ground_attack
                     else
-                      Attack.new(attributes["attack"]["air"])
+                      Attack.new(attack_attributes)
                     end
   end
   alias attack_air air_attack

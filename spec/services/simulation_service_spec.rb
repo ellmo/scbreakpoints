@@ -46,21 +46,69 @@ describe SimulationService do
     end
   end
 
-  xdescribe "benchmark" do
-    ling_zealot_arguments = { red: Unit.find(:ling), blue: Unit.find(:zealot) }
-    goon_tank_arguments = { red: Unit.find(:dragoon), blue: Unit.find(:tank) }
+  context "Corsair vs Goliath" do
+    let(:corsair) { Unit.find(:corsair) }
+    let(:goliath) { Unit.find(:goliath) }
 
-    it do
-      Benchmark.ips do |bench|
-        bench.report("Ling vs Zealot") do
-          described_class.new(ling_zealot_arguments).call
-        end
-        bench.report("Dragoon vs Tank") do
-          described_class.new(goon_tank_arguments).call
-        end
+    let(:arguments) { { blue: corsair, red: goliath, report: true } }
+    let(:success)   { { winner: goliath, hits: 12, against: 0 } }
 
-        bench.compare!
-      end
+    it "is a success" do
+      expect(subject).to be_success
+    end
+
+    it "Golaith kills Corsair with no hits taken" do
+      expect(subject.success).to eq success
     end
   end
+
+  context "Marine vs Overlord" do
+    let(:marine) { Unit.find(:marine) }
+    let(:ovie) { Unit.find(:overlord) }
+
+    let(:arguments) { { blue: marine, red: ovie, report: true } }
+    let(:success)   { { winner: marine, hits: 36, against: 0 } }
+
+    it "is a success" do
+      expect(subject).to be_success
+    end
+
+    it "Marine kills ovie with no hits taken" do
+      expect(subject.success).to eq success
+    end
+  end
+
+  context "Corsair vs Mutalisk" do
+    let(:corsair) { Unit.find(:corsair) }
+    let(:muta) { Unit.find(:muta) }
+
+    let(:arguments) { { blue: corsair, red: muta, report: true } }
+    let(:success)   { { winner: corsair, hits: 42, against: 11 } }
+
+    it "is a success" do
+      expect(subject).to be_success
+    end
+
+    it "Marine kills ovie with no hits taken" do
+      expect(subject.success).to eq success
+    end
+  end
+
+  # xdescribe "benchmark" do
+  #   ling_zealot_arguments = { red: Unit.find(:ling), blue: Unit.find(:zealot) }
+  #   goon_tank_arguments = { red: Unit.find(:dragoon), blue: Unit.find(:tank) }
+
+  #   it do
+  #     Benchmark.ips do |bench|
+  #       bench.report("Ling vs Zealot") do
+  #         described_class.new(ling_zealot_arguments).call
+  #       end
+  #       bench.report("Dragoon vs Tank") do
+  #         described_class.new(goon_tank_arguments).call
+  #       end
+
+  #       bench.compare!
+  #     end
+  #   end
+  # end
 end
