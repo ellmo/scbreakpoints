@@ -1,15 +1,38 @@
 units:
   scv:
+    label: "SCV"
     hitpoints: 60
     attack:
       ground:
         damage: 5
+        cooldown:
 
   marine:
     hitpoints: 40
     attack:
       ground:
         damage: 6
+        cooldown: 630
+      air: same
+
+  firebat:
+    hitpoints: 50
+    armor: 1
+    attack:
+      ground:
+        attacks: 2
+        damage: 8
+        type: plasma
+        cooldown: 924
+
+  ghost:
+    hitpoints: 45
+    attack:
+      ground:
+        attacks: 1
+        damage: 10
+        type: plasma
+        cooldown: 924
       air: same
 
   vulture:
@@ -20,8 +43,10 @@ units:
         damage: 20
         type: plasma
         bonus: 2
+        cooldown: 1260
 
   siege_tank_tank_mode:
+    label: "Siege Tank (T)"
     slugs:
       - siege_tank
       - tank
@@ -34,8 +59,10 @@ units:
         damage: 30
         type: explosive
         bonus: 3
+        cooldown: 1554
 
   siege_tank_siege_mode:
+    label: "Siege Tank (S)"
     slugs:
       - siege
       - sieged_tank
@@ -47,3 +74,34 @@ units:
         damage: 70
         type: explosive
         bonus: 5
+        cooldown: 3150
+
+  goliath:
+    size: large
+    hitpoints: 125
+    armor: 1
+    attack:
+      ground:
+        damage: 12
+        bonus: 1
+        cooldown: 924
+      air:
+        damage: 10
+        attacks: 2
+        bonus: 2
+        cooldown: 924
+        type: explosive
+
+  battlecruiser:
+    slugs:
+      - bc
+    size: large
+    hitpoints: 500
+    flying: true
+    armor: 3
+    attack:
+      ground:
+        damage: 25
+        bonus: 3
+        cooldown: 1260
+      air: same

@@ -4,10 +4,10 @@ ul.tabs.race-selector#my-race-tabs data-tabs=""
   = race_selector("protoss", mine: mine)
 
 .tabs-content.race-tab data-tabs-content="my-race-tabs"
-  .tabs-panel#my-terran class=active_element?("terran", mine)
+  = race_tab "terran", mine: mine
     p HUMAN
-  .tabs-panel#my-zerg class=active_element?("zerg", mine)
+  = race_tab "zerg", mine: mine
     p DJERG
-  .tabs-panel#my-protoss class=active_element?("protoss", mine)
+  = race_tab "protoss", mine: mine
     p PROTOSZ
 

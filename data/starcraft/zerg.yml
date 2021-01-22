@@ -1,4 +1,11 @@
 units:
+  overlord:
+    slugs:
+      - ovie
+      - lord
+      - over
+    hitpoints: 200
+
   zergling:
     slugs:
       - ling
@@ -6,6 +13,7 @@ units:
     attack:
       ground:
         damage: 5
+        cooldown: 336
 
   hydralisk:
     slugs:
@@ -16,7 +24,20 @@ units:
       ground:
         damage: 10
         type: explosive
+        cooldown: 630
       air: same
+
+  ultralisk:
+    slugs:
+      - ultra
+    size: large
+    hitpoints: 400
+    armor: 1
+    attack:
+      ground:
+        damage: 20
+        bonus: 3
+        cooldown: 630
 
   mutalisk:
     slugs:
@@ -26,4 +47,29 @@ units:
     attack:
       ground:
         damage: 9
+        cooldown: 1260
       air: same
+
+  guardian:
+    size: large
+    slugs:
+      - guard
+    flying: true
+    hitpoints: 150
+    armor: 2
+    attack:
+      ground:
+        damage: 20
+        bonus: 2
+        cooldown: 1260
+
+  devourer:
+    size: large
+    flying: true
+    hitpoints: 250
+    armor: 2
+    attack:
+      ground:
+        damage: 25
+        bonus: 2
+        cooldown: 4200

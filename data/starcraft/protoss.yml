@@ -7,6 +7,7 @@ units:
       ground:
         damage: 8
         attacks: 2
+        cooldown: 924
 
   dragoon:
     slugs:
@@ -20,6 +21,40 @@ units:
         damage: 20
         type: explosive
         bonus: 2
+        cooldown: 1260
       air: same
 
+  dark_templar:
+    slugs:
+      - dt
+    shields: 40
+    hitpoints: 80
+    armor: 1
+    attack:
+      ground:
+        damage: 40
+        bonus: 3
+        cooldown: 1260
+
+  reaver:
+    size: large
+    shields: 80
+    hitpoints: 100
+    attack:
+      ground:
+        damage: 100
+        bonus: 25
+        cooldown: 2520
+
+  corsair:
+    size: medium
+    flying: true
+    shields: 80
+    hitpoints: 100
+    armor: 1
+    attack:
+      air:
+        damage: 5
+        type: explosive
+        cooldown: 336
 

@@ -5,32 +5,63 @@ module AttackData
 
   extend ActiveSupport::Concern
 
-  def attack
-    @attack ||= Attack.new(attributes["attack"]["ground"])
+  included do
+    attr_reader :target
   end
 
-  def attack_air
-    @attack_air ||= case attributes["attack"]["air"]
+  def target!(target_unit)
+    @target = target_unit
+  end
+
+  def attack
+    raise ArgumentError unless target.is_a? Unit
+
+    @attack ||= target.flying ? attack_air : ground_attack
+  end
+
+  def coefficient
+    return nil if attack.nil?
+    return 1.0 if attack.normal?
+
+    @coefficient = COEFF_MATRIX[DMG_TYPES.index(attack.type)][SIZES.index(target.size)]
+  end
+
+  def strikes
+    return [] unless attack
+
+    @strikes ||= attack.cooldown.multiples
+  end
+
+  def strike!
+    target.harm!(attack, coefficient)
+  end
+
+  def report_strike!(timestamp, side)
+    damage_done = "-#{target.harm!(attack, coefficient)}".color(:brown)
+
+    if side == :red
+      StdoutReporter.report_red(self, timestamp, damage_done)
+    else
+      StdoutReporter.report_blue(self, timestamp, damage_done)
+    end
+  end
+
+private
+
+  def ground_attack
+    attack_attributes = attributes.dig("attack", "ground")
+    @ground_attack ||= attack_attributes ? Attack.new(attack_attributes) : nil
+  end
+
+  def air_attack
+    @air_attack ||= case attack_attributes = attributes.dig("attack", "air")
                     when nil
                       nil
                     when "same"
-                      attack
+                      ground_attack
                     else
-                      Attack.new(attributes["attack"]["air"])
+                      Attack.new(attack_attributes)
                     end
   end
-  alias air_attack attack_air
-
-  def attack_vs(target)
-    raise ArgumentError unless target.is_a? Unit
-
-    target.flying ? attack_air : attack
-  end
-
-  def coefficient_vs(target)
-    return nil if attack_vs(target).nil?
-    return 1.0 if attack_vs(target).normal?
-
-    COEFF_MATRIX[DMG_TYPES.index(attack_vs(target).type)][SIZES.index(target.size)]
-  end
+  alias attack_air air_attack
 end

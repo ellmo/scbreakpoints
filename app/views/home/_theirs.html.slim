@@ -4,9 +4,9 @@ ul.tabs.race-selector#their-race-tabs data-tabs=""
   = race_selector("protoss", theirs: theirs)
 
 .tabs-content.race-tab data-tabs-content="their-race-tabs"
-  .tabs-panel#their-terran class=active_element?("terran", theirs)
+  = race_tab "terran", theirs: theirs
     p HUMAN
-  .tabs-panel#their-zerg class=active_element?("zerg", theirs)
+  = race_tab "zerg", theirs: theirs
     p DJERG
-  .tabs-panel#their-protoss class=active_element?("protoss", theirs)
+  = race_tab "protoss", theirs: theirs
     p PROTOSZ

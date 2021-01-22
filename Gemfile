@@ -36,5 +36,6 @@ group :development do
 end
 
 group :test do
+  gem "benchmark-ips"
   gem "mongoid-rspec"
 end
