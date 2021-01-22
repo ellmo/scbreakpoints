@@ -52,9 +52,9 @@ class SimulationService < BaseService
 
     message do
       if blue.dead?
-        "#{red.label} wins, with #{strikes[:red]} strikes against #{strikes[:blue]}."
+        { winner: red, hits: strikes[:red], against: strikes[:blue] }
       else
-        "#{blue.label} wins, with #{strikes[:blue]} strikes against #{strikes[:red]}."
+        { winner: blue, hits: strikes[:blue], against: strikes[:red] }
       end
     end
   end

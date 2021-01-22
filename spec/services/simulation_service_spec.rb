@@ -15,26 +15,34 @@ describe SimulationService do
   end
 
   context "Zergling vs Zealot" do
+    let(:zealot) { Unit.find(:zealot) }
+    let(:ling) { Unit.find(:ling) }
+
     let(:arguments) { { blue: Unit.find(:ling), red: Unit.find(:zealot), report: true } }
+    let(:success)   { { winner: zealot, hits: 3, against: 6 } }
 
     it "is a success" do
       expect(subject).to be_success
     end
 
     it "Zealot wins in 3 vs 6 strikes" do
-      expect(subject.success).to eq "Zealot wins, with 3 strikes against 6."
+      expect(subject.success).to eq success
     end
   end
 
   context "Goon vs Tank (T)" do
-    let(:arguments) { { blue: Unit.find(:goon), red: Unit.find(:tank), report: true } }
+    let(:goon) { Unit.find(:goon) }
+    let(:tank) { Unit.find(:tank) }
+
+    let(:arguments) { { blue: goon, red: tank, report: true } }
+    let(:success)   { { winner: goon, hits: 8, against: 6 } }
 
     it "is a success" do
       expect(subject).to be_success
     end
 
     it "Dragoon wins" do
-      expect(subject.success).to eq "Dragoon wins, with 8 strikes against 6."
+      expect(subject.success).to eq success
     end
   end
 
