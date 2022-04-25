@@ -8,12 +8,12 @@ defaults: &defaults
 ruby_machine: &ruby_machine
   <<: *defaults
   docker:
-    - image: circleci/ruby:2.6.6-stretch-node
+    - image: cimg/ruby:2.6.6
       environment:
         RAILS_ENV: test
         BUNDLE_PATH: vendor/bundle
         BUNDLER_VERSION: 2.1.4
-    - image: circleci/mongo:4.0.20-xenial-ram
+    - image: circleci/mongo:4.0-xenial-ram
   executor: ruby/default
 
 jobs:
