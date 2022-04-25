@@ -8,8 +8,7 @@ MethodLength:
   Max: 15
   Exclude:
     - 'spec/**/*'
-Metrics/LineLength:
-  Enabled: false
+
 Metrics/AbcSize:
   Max: 25
   Exclude:
@@ -19,6 +18,8 @@ Metrics/BlockLength:
     - 'spec/**/*'
 
 # LAYOUT
+Metrics/LineLength:
+  Enabled: false
 Layout/AccessModifierIndentation:
   Enabled: false
 Layout/CommentIndentation:
