@@ -1,14 +1,14 @@
 AllCops:
+  NewCops: disable
   Exclude:
     - 'app/views/**/*.slim'
 
 # METRICS
-MethodLength:
+Metrics/MethodLength:
   CountComments: false
   Max: 15
   Exclude:
     - 'spec/**/*'
-
 Metrics/AbcSize:
   Max: 25
   Exclude:
@@ -18,8 +18,6 @@ Metrics/BlockLength:
     - 'spec/**/*'
 
 # LAYOUT
-Metrics/LineLength:
-  Enabled: false
 Layout/AccessModifierIndentation:
   Enabled: false
 Layout/CommentIndentation:
@@ -34,6 +32,8 @@ Layout/EmptyLinesAroundClassBody:
 Layout/HashAlignment:
   EnforcedHashRocketStyle: separator
   EnforcedColonStyle: table
+Layout/LineLength:
+  Enabled: false
 Layout/SpaceAroundOperators:
   Enabled: false
 
