@@ -28,7 +28,9 @@ gem "piper-rb", "~> 0.4"
 group :development, :test do
   gem "pry-rails"
   gem "rspec-rails"
-  gem "rubocop"
+  gem "rubocop", "~> 1.28"
+  gem "rubocop-rails"
+  gem "rubocop-rspec"
 end
 
 group :development do
