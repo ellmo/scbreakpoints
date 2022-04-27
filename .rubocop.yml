@@ -6,6 +6,7 @@ AllCops:
   NewCops: disable
   Exclude:
     - 'app/views/**/*.slim'
+    - 'bin/bundle'
     - 'vendor/**/*'
 
 # METRICS
