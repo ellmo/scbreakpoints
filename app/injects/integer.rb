@@ -11,7 +11,5 @@ class Integer
     values
   end
 
-  def color(value)
-    to_s.color(value)
-  end
+  delegate :color, to: :to_s
 end

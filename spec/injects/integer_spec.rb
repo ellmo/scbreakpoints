@@ -10,7 +10,7 @@ describe Integer do
       let(:expected_20) { 6720 }
       let(:expected_29) { 9744 }
 
-      it do
+      it "calculates proper multiples" do
         expect(subject[3]).to eq expected_3
         expect(subject[20]).to eq expected_20
         expect(subject[29]).to eq expected_29

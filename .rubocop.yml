@@ -1,15 +1,20 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
 AllCops:
+  NewCops: disable
   Exclude:
     - 'app/views/**/*.slim'
+    - 'bin/bundle'
+    - 'vendor/**/*'
 
 # METRICS
-MethodLength:
+Metrics/MethodLength:
   CountComments: false
   Max: 15
   Exclude:
     - 'spec/**/*'
-Metrics/LineLength:
-  Enabled: false
 Metrics/AbcSize:
   Max: 25
   Exclude:
@@ -33,7 +38,13 @@ Layout/EmptyLinesAroundClassBody:
 Layout/HashAlignment:
   EnforcedHashRocketStyle: separator
   EnforcedColonStyle: table
+Layout/LineLength:
+  Enabled: false
 Layout/SpaceAroundOperators:
+  Enabled: false
+
+# NAMING
+Naming/VariableNumber:
   Enabled: false
 
 # STYLE
@@ -45,3 +56,18 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 Style/StringLiterals:
   EnforcedStyle: double_quotes
+
+# RAILS
+Rails/Output:
+  Exclude:
+    - 'app/services/stdout_reporter.rb'
+
+# RSPEC
+RSpec/ContextWording:
+  Enabled: false
+RSpec/NamedSubject:
+  Enabled: false
+RSpec/NestedGroups:
+  Max: 5
+RSpec/MultipleExpectations:
+  Max: 5

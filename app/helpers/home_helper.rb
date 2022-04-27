@@ -1,6 +1,6 @@
 module HomeHelper
   def race_selector(race, mine: nil, theirs: nil)
-    content_tag :li, class: selector_class(race, mine, theirs) do
+    tag.li(class: selector_class(race, mine, theirs)) do
       link_to "", selector_href(race, mine).prepend("#"),
               aria:  selector_aria(race, mine, theirs),
               class: [race]
@@ -8,9 +8,8 @@ module HomeHelper
   end
 
   def race_tab(race, mine: nil, theirs: nil)
-    content_tag :div,
-                id:    selector_href(race, mine),
-                class: tab_class(race, mine, theirs) do
+    tag.div(id:    selector_href(race, mine),
+            class: tab_class(race, mine, theirs)) do
       yield if block_given?
     end
   end

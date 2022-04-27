@@ -17,7 +17,7 @@ class Race
   def self.find(name)
     return unless name.in? NAMES
 
-    self.new(name)
+    new(name)
   end
 
 end
