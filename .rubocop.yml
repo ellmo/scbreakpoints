@@ -51,3 +51,11 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 Style/StringLiterals:
   EnforcedStyle: double_quotes
+
+# RSPEC
+RSpec/ContextWording:
+  Enabled: false
+RSpec/NestedGroups:
+  Max: 5
+RSpec/NamedSubject:
+  Enabled: false
