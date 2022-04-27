@@ -18,7 +18,7 @@ describe SimulationService do
     let(:zealot) { Unit.find(:zealot) }
     let(:ling) { Unit.find(:ling) }
 
-    let(:arguments) { { blue: Unit.find(:ling), red: Unit.find(:zealot)} }
+    let(:arguments) { { blue: Unit.find(:ling), red: Unit.find(:zealot) } }
     let(:success)   { { winner: zealot, hits: 3, against: 6 } }
 
     it "is a success" do
@@ -34,7 +34,7 @@ describe SimulationService do
     let(:goon) { Unit.find(:goon) }
     let(:tank) { Unit.find(:tank) }
 
-    let(:arguments) { { blue: goon, red: tank} }
+    let(:arguments) { { blue: goon, red: tank } }
     let(:success)   { { winner: goon, hits: 8, against: 6 } }
 
     it "is a success" do
@@ -50,7 +50,7 @@ describe SimulationService do
     let(:corsair) { Unit.find(:corsair) }
     let(:goliath) { Unit.find(:goliath) }
 
-    let(:arguments) { { blue: corsair, red: goliath} }
+    let(:arguments) { { blue: corsair, red: goliath } }
     let(:success)   { { winner: goliath, hits: 12, against: 0 } }
 
     it "is a success" do
@@ -66,7 +66,7 @@ describe SimulationService do
     let(:marine) { Unit.find(:marine) }
     let(:ovie) { Unit.find(:overlord) }
 
-    let(:arguments) { { blue: marine, red: ovie} }
+    let(:arguments) { { blue: marine, red: ovie } }
     let(:success)   { { winner: marine, hits: 35, against: 0 } }
 
     it "is a success" do
@@ -82,7 +82,7 @@ describe SimulationService do
     let(:corsair) { Unit.find(:corsair) }
     let(:muta) { Unit.find(:muta) }
 
-    let(:arguments) { { blue: corsair, red: muta} }
+    let(:arguments) { { blue: corsair, red: muta } }
     let(:success)   { { winner: corsair, hits: 42, against: 11 } }
 
     it "is a success" do
