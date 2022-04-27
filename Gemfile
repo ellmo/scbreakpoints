@@ -29,7 +29,7 @@ group :development, :test do
   gem "pry-rails"
   gem "rspec-rails"
   gem "rubocop", "~> 1.28"
-  gem "rubocop-rails"
+  gem "rubocop-rails", "~> 2.14"
   gem "rubocop-rspec"
 end
 
