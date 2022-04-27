@@ -7,6 +7,7 @@ xdescribe Calculator::Breakpoints do
 
   context "no arguments passed" do
     let(:service) { described_class.new }
+
     it "raises error" do
       expect { subject }.to raise_error(Dry::Struct::Error)
     end

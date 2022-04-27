@@ -15,7 +15,7 @@ class FullCalculatorService < BaseService
     bump(:opponent) { data[opponent] }
   end
 
-  pipe :step_3 do
+  pipe :step3 do
     true
   end
 end
