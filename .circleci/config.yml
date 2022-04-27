@@ -8,7 +8,7 @@ defaults: &defaults
 ruby_machine: &ruby_machine
   <<: *defaults
   docker:
-    - image: cimg/ruby:2.6.6
+    - image: cimg/ruby:2.6.6-node
       environment:
         RAILS_ENV: test
         BUNDLE_PATH: vendor/bundle
