@@ -4,7 +4,7 @@ describe DataLoaderService do
   subject { service.call }
 
   let(:service) { described_class.new }
-  let(:dump_path) { File.join(Rails.root, "spec", "fixtures", "data.dump") }
+  let(:dump_path) { Rails.root.join("spec/fixtures/data.dump") }
 
   context "response success" do
     it "is a success" do

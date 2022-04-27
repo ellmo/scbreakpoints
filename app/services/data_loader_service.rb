@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DataLoaderService < BaseService
-  SC1_PATH = File.join(Rails.root, "data", "starcraft")
+  SC1_PATH = Rails.root.join("data/starcraft")
 
   pipe :load_entries do
     start_hash = { "units" => {} }
