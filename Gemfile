@@ -23,6 +23,7 @@ gem "slim-rails", "~> 3.2"
 #=======
 gem "autoprefixer-rails" # foundation  requirement
 gem "bootsnap", ">= 1.4.2", require: false
+gem "dotenv-rails"
 gem "piper-rb", "~> 0.4"
 gem "rails-healthcheck"
 

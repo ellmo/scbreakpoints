@@ -3,9 +3,12 @@ development:
     default:
       database: scbreakpoints-dev
       hosts:
-        - localhost:27017
+        - <%= ENV['MONGO_HOST'] %>:27017
       options:
         server_selection_timeout: 1
+        # password: <%= ENV['MONGO_PASSWORD'] %>
+        # user: <%= ENV['MONGO_USERNAME'] %>
+        # auth_source: admin
 
 test:
   clients:
@@ -15,3 +18,15 @@ test:
         - localhost:27017
       options:
         server_selection_timeout: 1
+
+production:
+  clients:
+    default:
+      database: scbreakpoints
+      hosts:
+        - <%= ENV['MONGO_HOST'] %>:27017
+      options:
+        server_selection_timeout: 1
+        password: <%= ENV['MONGO_PASSWORD'] %>
+        user: <%= ENV['MONGO_USERNAME'] %>
+        auth_source: admin
