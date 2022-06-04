@@ -58,6 +58,8 @@ Style/StringLiterals:
   EnforcedStyle: double_quotes
 
 # RAILS
+Rails/CreateTableWithTimestamps:
+  Enabled: false
 Rails/Output:
   Exclude:
     - 'app/services/stdout_reporter.rb'
