@@ -1,11 +1,12 @@
 development:
   clients:
     default:
-      database: scbreakpoints-dev
-      hosts:
-        - <%= ENV['MONGO_HOST'] %>:27017
+      # database: scbreakpoints-dev
+      uri: mongodb+srv://<uri>
+      # hosts:
+        # - <%= ENV['MONGO_HOST'] %>:27017
       options:
-        server_selection_timeout: 1
+        server_selection_timeout: 5
         # password: <%= ENV['MONGO_PASSWORD'] %>
         # user: <%= ENV['MONGO_USERNAME'] %>
         # auth_source: admin

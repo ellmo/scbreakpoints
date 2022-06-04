@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 #======
 # CORE
 #====
-gem "mongoid", "~> 7.0.5"
+gem "mongoid", "~> 7.4"
 gem "puma", "~> 4.1"
 gem "rails", "~> 6.0.4"
 
