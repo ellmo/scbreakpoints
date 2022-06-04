@@ -1,30 +1,24 @@
-class Unit < ApplicationRecord
+class Unit
   SIZES = %w[small medium large].freeze
   TYPES = %w[explosive plasma].freeze
-
-#=======
-# ASSOC
-#=====
-  # belongs_to :race
-  has_many :slugs, dependent: :deestroy
 
 #======
 #= DOC
 #====
   # include Mongoid::Document
 
-  # field :race,      type: String
-  # field :name,      type: String
-  # field :label,     type: String
-  # field :size,      type: String,  default: "small"
-  # field :flying,    type: Boolean, default: false
-  # field :slugs,     type: Array
+  field :race,      type: String
+  field :name,      type: String
+  field :label,     type: String
+  field :size,      type: String,  default: "small"
+  field :flying,    type: Boolean, default: false
+  field :slugs,     type: Array
 
-  # field :hitpoints, type: Integer
-  # field :armor,     type: Integer, default: 0
-  # field :shields,   type: Integer, default: 0
+  field :hitpoints, type: Integer
+  field :armor,     type: Integer, default: 0
+  field :shields,   type: Integer, default: 0
 
-  # field :attack,    type: Hash
+  field :attack,    type: Hash
 
   attr_reader :current_hp, :current_shields
 
@@ -46,7 +40,7 @@ class Unit < ApplicationRecord
   end
 
   def load_health
-    @current_hp      = hitpoints
+    @current_hp     = hitpoints
     @current_shields = shields
   end
 
