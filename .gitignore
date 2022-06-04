@@ -24,7 +24,9 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-
 # Do not ignore fixture dump
 *.dump
 !spec/fixtures/data.dump
+
+# Ignore SQLite database files
+db/*.sqlite3
