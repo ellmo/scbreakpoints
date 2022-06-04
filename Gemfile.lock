@@ -273,6 +273,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    sqlite3 (1.4.2)
     temple (0.8.2)
     thor (1.2.1)
     thread_safe (0.3.6)
@@ -296,7 +297,6 @@ DEPENDENCIES
   foundation-rails
   jbuilder (~> 2.7)
   listen
-  mongoid (~> 7.4)
   mongoid-rspec
   piper-rb (~> 0.4)
   pry-rails
@@ -310,6 +310,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   slim (~> 4.1)
   slim-rails (~> 3.2)
+  sqlite3
 
 RUBY VERSION
    ruby 2.6.6p146
