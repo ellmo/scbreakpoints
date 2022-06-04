@@ -1,31 +1,22 @@
 class HomeController < ApplicationController
-  before_action :tvt_failsafe
+  before_action :fetch_records
 
   def index
-    render locals: { mine: mine, theirs: theirs }
-  end
-
-  def mine
-    @mine ||= record_for(params[:mine])
-  end
-
-  def theirs
-    @theirs ||= record_for(params[:theirs])
+    render locals: { mine: @attacker, theirs: @target }
   end
 
   def params
-    @params ||= super.permit(:mine, :theirs)
+    @params ||= super.permit(:combatants)
   end
 
 private
 
-  def record_for(slug)
-    Unit.find(slug) || Race.find(slug)
-  end
+  def fetch_records
+    combatants = params[:combatants].split(":")
 
-  def tvt_failsafe
-    return if mine && theirs
+    @attacker = Unit.find(combatants.first)
+    @target   = Unit.find(combatants.second)
 
-    redirect_to "/terran/terran"
+    redirect_to "/marine:marine" unless @attacker && @target
   end
 end
