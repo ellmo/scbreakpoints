@@ -5,7 +5,7 @@ units:
     attack:
       ground:
         damage: 5
-        cooldown:
+        cooldown: 630
 
   marine:
     hitpoints: 40

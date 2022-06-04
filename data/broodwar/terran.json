@@ -1,0 +1,16 @@
+{
+  "units": [
+    {
+      "name": "SCV",
+      "hitpoints": 60,
+      "g_damage": 5,
+      "g_cooldown": 630
+    },
+    {
+      "name": "marine",
+      "hitpoints": 40,
+      "g_damage": 6,
+      "g_cooldown": 630
+    }
+  ]
+}

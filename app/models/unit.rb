@@ -6,7 +6,9 @@ class Unit < ApplicationRecord
 # ASSOC
 #=====
   # belongs_to :race
-  has_many :slugs, dependent: :deestroy
+  has_many :slugs, dependent: :destroy
+
+  accepts_nested_attributes_for :slugs
 
 #======
 #= DOC
@@ -31,7 +33,7 @@ class Unit < ApplicationRecord
 #============
 #= CALLBACKS
 #==========
-  before_save :add_name_to_slugs, -> { slugs_changed? }
+  # before_save :add_name_to_slugs, -> { slugs_changed? }
   before_save :default_label, -> { name_changed? }
   after_initialize :load_health
 
