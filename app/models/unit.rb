@@ -1,6 +1,6 @@
 class Unit < ApplicationRecord
   SIZES = %w[small medium large].freeze
-  TYPES = %w[explosive plasma].freeze
+  # TYPES = %w[explosive plasma].freeze
 
 #=======
 # ASSOC
@@ -8,7 +8,9 @@ class Unit < ApplicationRecord
   # belongs_to :race
   has_many :slugs, dependent: :destroy
 
-  accepts_nested_attributes_for :slugs
+  attr_accessor :air, :slugnames
+
+  # accepts_nested_attributes_for :slugs, allow_destroy: true
 
 #======
 #= DOC
@@ -33,8 +35,8 @@ class Unit < ApplicationRecord
 #============
 #= CALLBACKS
 #==========
-  # before_save :add_name_to_slugs, -> { slugs_changed? }
-  before_save :default_label, -> { name_changed? }
+  after_save :create_slugs
+  # before_save :default_label, -> { name_changed? }
   after_initialize :load_health
 
 #==========
@@ -44,7 +46,8 @@ class Unit < ApplicationRecord
   include HealthData
 
   def self.find(slug)
-    Unit.find_by slugs: slug
+    Unit.joins(:slugs).where({ slugs: { label: slug.downcase } }).first
+    # Unit.find_by name: name
   end
 
   def load_health
@@ -52,13 +55,13 @@ class Unit < ApplicationRecord
     @current_shields = shields
   end
 
-  def size_i
-    SIZES.index size
+  def size
+    SIZES.index read_attribute(:size)
   end
 
-  def type_i
-    TYPES.index attack["ground"]["type"]
-  end
+  # def type_i
+  #   # TYPES.index attack["ground"]["type"]
+  # end
 
   def protoss?
     race == "protoss"
@@ -72,13 +75,19 @@ class Unit < ApplicationRecord
     race == "zerg"
   end
 
+  # def to_s
+  #   "#<Unit:#{name} race:#{race} >"
+  # end
+
 private
 
-  def add_name_to_slugs
-    if slugs.present? && slugs.index(name).nil?
-      slugs << name
-    else
-      self.slugs = [name]
+  def create_slugs
+    Slug.find_or_create_by(unit_id: id, label: name)
+
+    return unless slugnames
+
+    slugnames.each do |label|
+      Slug.find_or_create_by(unit_id: id, label: label)
     end
   end
 

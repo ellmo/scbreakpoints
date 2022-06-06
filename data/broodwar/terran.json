@@ -1,7 +1,8 @@
 {
   "units": [
     {
-      "name": "SCV",
+      "name": "scv",
+      "slugnames": ["worker"],
       "hitpoints": 60,
       "g_damage": 5,
       "g_cooldown": 630
@@ -10,7 +11,17 @@
       "name": "marine",
       "hitpoints": 40,
       "g_damage": 6,
-      "g_cooldown": 630
+      "g_cooldown": 630,
+      "air": "same"
+    },
+    {
+      "name": "firebat",
+      "hitpoints": 50,
+      "armor": 1,
+      "g_damage": 8,
+      "g_attacks": 2,
+      "g_type": 2,
+      "g_cooldown": 924
     }
   ]
 }
