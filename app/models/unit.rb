@@ -9,34 +9,13 @@ class Unit < ApplicationRecord
   has_many :slugs, dependent: :destroy
 
   attr_accessor :air, :slugnames
-
-  # accepts_nested_attributes_for :slugs, allow_destroy: true
-
-#======
-#= DOC
-#====
-  # include Mongoid::Document
-
-  # field :race,      type: String
-  # field :name,      type: String
-  # field :label,     type: String
-  # field :size,      type: String,  default: "small"
-  # field :flying,    type: Boolean, default: false
-  # field :slugs,     type: Array
-
-  # field :hitpoints, type: Integer
-  # field :armor,     type: Integer, default: 0
-  # field :shields,   type: Integer, default: 0
-
-  # field :attack,    type: Hash
-
   attr_reader :current_hp, :current_shields
 
 #============
 #= CALLBACKS
 #==========
-  after_save :create_slugs
-  # before_save :default_label, -> { name_changed? }
+  before_save :copy_attack_data!
+  after_save :create_slugs!
   after_initialize :load_health
 
 #==========
@@ -47,7 +26,6 @@ class Unit < ApplicationRecord
 
   def self.find(slug)
     Unit.joins(:slugs).where({ slugs: { label: slug.downcase } }).first
-    # Unit.find_by name: name
   end
 
   def load_health
@@ -81,7 +59,7 @@ class Unit < ApplicationRecord
 
 private
 
-  def create_slugs
+  def create_slugs!
     Slug.find_or_create_by(unit_id: id, label: name)
 
     return unless slugnames
@@ -91,7 +69,14 @@ private
     end
   end
 
-  def default_label
-    self.label ||= name.split("_").map(&:capitalize).join(" ")
+  def copy_attack_data!
+    return unless air == "same"
+    return if [g_damage, a_damage].all?(:nil) || [g_damage, a_damage].all?(&:present?)
+
+    self.a_damage   = g_damage
+    self.a_cooldown = g_cooldown
+    self.a_attacks  = g_attacks
+    self.a_bonus    = g_bonus
+    self.a_type     = g_type
   end
 end
