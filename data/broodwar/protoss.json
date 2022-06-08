@@ -1,0 +1,56 @@
+{
+  "units": [
+    {
+      "name": "zealot",
+      "hitpoints": 100,
+      "shields": 60,
+      "armor": 1,
+      "g_damage": 8,
+      "g_attacks": 2,
+      "g_cooldown": 924
+    },
+    {
+      "name": "dragoon",
+      "slugnames": ["goon"],
+      "size": 2,
+      "hitpoints": 100,
+      "shields": 80,
+      "armor": 1,
+      "g_damage": 20,
+      "g_cooldown": 1260,
+      "g_type": 1,
+      "air": "same"
+    },
+    {
+      "name": "dark templar",
+      "slugnames": ["dt", "cape man", "capeman"],
+      "hitpoints": 80,
+      "shields": 40,
+      "armor": 1,
+      "g_damage": 45,
+      "g_cooldown": 1260,
+      "g_bonus": 3
+    },
+    {
+      "name": "reaver",
+      "slugnames": ["riba"],
+      "size": 2,
+      "shields": 80,
+      "hitpoints": 100,
+      "g_damage": 100,
+      "g_bonus": 25,
+      "g_cooldown": 2520
+    },
+    {
+      "name": "corsair",
+      "size": 1,
+      "flying": true,
+      "shields": 80,
+      "hitpoints": 100,
+      "armor": 1,
+      "a_damage": 5,
+      "a_type": 1,
+      "a_cooldown": 336
+    }
+  ]
+}

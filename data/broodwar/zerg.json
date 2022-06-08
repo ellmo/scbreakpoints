@@ -1,0 +1,39 @@
+{
+  "units": [
+    {
+      "name": "zergling",
+      "slugnames": ["ling"],
+      "hitpoints": 45,
+      "armor": 0,
+      "g_damage": 6,
+      "g_cooldown": 336
+    },
+    {
+      "name": "overlord",
+      "slugnames": ["ov", "ovie", "over", "lord"],
+      "flying": true,
+      "size": 2,
+      "hitpoints": 200
+    },
+    {
+      "name": "mutalisk",
+      "slugnames": ["muta", "mutmut"],
+      "flying": true,
+      "hitpoints": 120,
+      "g_damage": 9,
+      "g_cooldown": 1260,
+      "air": "same"
+    },
+    {
+      "name": "guardian",
+      "slugnames": ["guard"],
+      "size": 2,
+      "flying": true,
+      "hitpoints": 150,
+      "armor": 2,
+      "g_damage": 20,
+      "g_bonus": 2,
+      "g_cooldown": 1260
+    }
+  ]
+}

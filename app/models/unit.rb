@@ -1,6 +1,5 @@
 class Unit < ApplicationRecord
   SIZES = %w[small medium large].freeze
-  # TYPES = %w[explosive plasma].freeze
 
 #=======
 # ASSOC
@@ -33,13 +32,9 @@ class Unit < ApplicationRecord
     @current_shields = shields
   end
 
-  def size
-    SIZES.index read_attribute(:size)
+  def size_s
+    SIZES[size]
   end
-
-  # def type_i
-  #   # TYPES.index attack["ground"]["type"]
-  # end
 
   def protoss?
     race == "protoss"
@@ -51,6 +46,10 @@ class Unit < ApplicationRecord
 
   def zerg?
     race == "zerg"
+  end
+
+  def label
+    "#{race.capitalize} #{name.capitalize}"
   end
 
   # def to_s
