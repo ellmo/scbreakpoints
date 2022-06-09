@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Home", type: :request do
+describe "Home" do
   describe "GET /index" do
     context "no params" do
       it "returns http success" do
@@ -11,16 +11,16 @@ RSpec.describe "Home", type: :request do
     end
 
     context "wrong params" do
-      it "returns http success" do
-        get "/dupa/kupa"
+      it "returns http redirect" do
+        get "/dupa:kupa"
 
         expect(response).to have_http_status(:redirect)
       end
     end
 
     context "slightly wrong params" do
-      it "returns http success" do
-        get "/ling/protos"
+      it "returns http redirect" do
+        get "/ling:protos"
 
         expect(response).to have_http_status(:redirect)
       end
@@ -28,7 +28,7 @@ RSpec.describe "Home", type: :request do
 
     context "proper params" do
       it "returns http success" do
-        get "/ling/protoss"
+        get "/ling:marine"
 
         expect(response).to have_http_status(:success)
       end

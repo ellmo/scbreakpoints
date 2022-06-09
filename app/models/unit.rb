@@ -24,6 +24,8 @@ class Unit < ApplicationRecord
   include HealthData
 
   def self.find(slug)
+    return nil unless slug
+
     Unit.joins(:slugs).where({ slugs: { label: slug.downcase } }).first
   end
 
