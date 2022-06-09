@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2022_06_04_165626) do
 
   create_table "units", force: :cascade do |t|
     t.string "name"
+    t.string "label"
     t.string "race"
     t.integer "size", default: 0
     t.boolean "flying", default: false

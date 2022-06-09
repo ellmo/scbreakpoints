@@ -2,6 +2,7 @@ class CreateUnits < ActiveRecord::Migration[6.0]
   def change # rubocop:disable Metrics/MethodLength
     create_table :units do |t|
       t.string :name
+      t.string :label
       t.string :race
       t.integer :size, default: 0
       t.boolean :flying, default: false
