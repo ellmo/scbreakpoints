@@ -67,7 +67,7 @@ describe SimulationService do
     let(:ovie) { Unit.find(:overlord) }
 
     let(:arguments) { { blue: marine, red: ovie } }
-    let(:success)   { { winner: marine, hits: 34, against: 0 } }
+    let(:success)   { { winner: marine, hits: 35, against: 0 } }
 
     it "is a success" do
       expect(subject).to be_success
@@ -83,7 +83,7 @@ describe SimulationService do
     let(:muta) { Unit.find(:muta) }
 
     let(:arguments) { { blue: corsair, red: muta } }
-    let(:success)   { { winner: corsair, hits: 40, against: 11 } }
+    let(:success)   { { winner: corsair, hits: 42, against: 11 } }
 
     it "is a success" do
       expect(subject).to be_success

@@ -31,7 +31,7 @@ class DataLoaderService < BaseService
     unit_data = {
       name:  attributes[:name],
       label: attributes.delete(:label) || attributes[:name].to_s.titleize,
-      race:  attributes[:race].capitalize,
+      race:  attributes[:race],
       size:  size_to_i(attributes.delete(:size))
     }.merge(attributes.slice(:hitpoints, :shields, :armor, :flying, :slugnames))
 
