@@ -28,5 +28,6 @@
 *.dump
 !spec/fixtures/data.dump
 
-# Ignore SQLite database files
+# Ignore SQLite database files, but keep config
 db/*.sqlite3
+!config/database.yml
