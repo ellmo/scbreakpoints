@@ -13,7 +13,6 @@ class Unit < ApplicationRecord
 #============
 #= CALLBACKS
 #==========
-  # before_save :copy_attack_data!
   after_save :create_slugs!
   after_initialize :load_health
 
