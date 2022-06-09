@@ -13,7 +13,7 @@ class Unit < ApplicationRecord
 #============
 #= CALLBACKS
 #==========
-  before_save :copy_attack_data!
+  # before_save :copy_attack_data!
   after_save :create_slugs!
   after_initialize :load_health
 
@@ -50,13 +50,17 @@ class Unit < ApplicationRecord
     race == "zerg"
   end
 
-  def label
-    "#{race.capitalize} #{name.capitalize}"
-  end
-
   # def to_s
-  #   "#<Unit:#{name} race:#{race} >"
+  #   "<Unit:#{label} asd>"
   # end
+
+  def inspect
+    if target
+      "<Unit:#{self[:label]} attack:#{attack.damage}>"
+    else
+      "<Unit:#{self[:label]}>"
+    end
+  end
 
 private
 
@@ -68,16 +72,5 @@ private
     slugnames.each do |label|
       Slug.find_or_create_by(unit_id: id, label: label)
     end
-  end
-
-  def copy_attack_data!
-    return unless air == "same"
-    return if [g_damage, a_damage].all?(:nil) || [g_damage, a_damage].all?(&:present?)
-
-    self.a_damage   = g_damage
-    self.a_cooldown = g_cooldown
-    self.a_attacks  = g_attacks
-    self.a_bonus    = g_bonus
-    self.a_type     = g_type
   end
 end

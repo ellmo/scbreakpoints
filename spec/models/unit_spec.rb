@@ -24,7 +24,7 @@ describe Unit, type: :model do
       let(:red)  { described_class.find "dragoon" }
       let(:blue) { described_class.find "mutalisk" }
 
-      it { binding.pry; is_expected.to eq 0.5 }
+      it { is_expected.to eq 0.5 }
     end
   end
 end
