@@ -12,10 +12,10 @@ class HomeController < ApplicationController
 private
 
   def fetch_records
-    combatants = params[:combatants].split(":")
+    combatants = params[:combatants].try(:split, ":")
 
-    @attacker = Unit.find(combatants.first)
-    @target   = Unit.find(combatants.second)
+    @attacker = Unit.find(combatants.try(:first))
+    @target   = Unit.find(combatants.try(:second))
 
     redirect_to "/marine:marine" unless @attacker && @target
   end

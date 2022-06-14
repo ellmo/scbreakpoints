@@ -1,7 +1,7 @@
 module AttackData
-  COEFF_MATRIX = [[0.5, 0.75, 1.0], [0.25, 0.5, 1.0]].freeze
-  SIZES        = %w[small medium large].freeze
-  DMG_TYPES    = %w[explosive plasma].freeze
+  COEFF_MATRIX = [[1.0, 1.0, 1.0], [0.5, 0.75, 1.0], [0.25, 0.5, 1.0]].freeze
+  # SIZES        = %w[small medium large].freeze
+  # DMG_TYPES    = %w[normal explosive plasma].freeze
 
   extend ActiveSupport::Concern
 
@@ -16,14 +16,13 @@ module AttackData
   def attack
     raise ArgumentError unless target.is_a? Unit
 
-    @attack ||= target.flying ? attack_air : ground_attack
+    @attack ||= target.flying ? air_attack : ground_attack
   end
 
   def coefficient
     return nil if attack.nil?
-    return 1.0 if attack.normal?
 
-    @coefficient = COEFF_MATRIX[DMG_TYPES.index(attack.type)][SIZES.index(target.size)]
+    @coefficient = COEFF_MATRIX[attack.type][target.size]
   end
 
   def strikes
@@ -49,19 +48,31 @@ module AttackData
 private
 
   def ground_attack
-    attack_attributes = attributes.dig("attack", "ground")
-    @ground_attack ||= attack_attributes ? Attack.new(attack_attributes) : nil
+    @ground_attack ||= g_damage ? Attack.new(ground_attack_attributes) : nil
   end
 
   def air_attack
-    @air_attack ||= case attack_attributes = attributes.dig("attack", "air")
-                    when nil
-                      nil
-                    when "same"
-                      ground_attack
-                    else
-                      Attack.new(attack_attributes)
-                    end
+    @air_attack ||= a_damage ? Attack.new(air_attack_attributes) : nil
   end
   alias attack_air air_attack
+
+  def ground_attack_attributes
+    {
+      damage:   g_damage,
+      attacks:  g_attacks,
+      cooldown: g_cooldown,
+      bonus:    g_bonus,
+      type:     g_type
+    }
+  end
+
+  def air_attack_attributes
+    {
+      damage:   a_damage,
+      attacks:  a_attacks,
+      cooldown: a_cooldown,
+      bonus:    a_bonus,
+      type:     a_type
+    }
+  end
 end

@@ -1,32 +1,19 @@
-class Unit
+class Unit < ApplicationRecord
   SIZES = %w[small medium large].freeze
-  TYPES = %w[explosive plasma].freeze
 
-#======
-#= DOC
-#====
-  include Mongoid::Document
+#=======
+# ASSOC
+#=====
+  # belongs_to :race
+  has_many :slugs, dependent: :destroy
 
-  field :race,      type: String
-  field :name,      type: String
-  field :label,     type: String
-  field :size,      type: String,  default: "small"
-  field :flying,    type: Boolean, default: false
-  field :slugs,     type: Array
-
-  field :hitpoints, type: Integer
-  field :armor,     type: Integer, default: 0
-  field :shields,   type: Integer, default: 0
-
-  field :attack,    type: Hash
-
+  attr_accessor :air, :slugnames
   attr_reader :current_hp, :current_shields
 
 #============
 #= CALLBACKS
 #==========
-  before_save :add_name_to_slugs, -> { slugs_changed? }
-  before_save :default_label, -> { name_changed? }
+  after_save :create_slugs!
   after_initialize :load_health
 
 #==========
@@ -36,20 +23,18 @@ class Unit
   include HealthData
 
   def self.find(slug)
-    Unit.find_by slugs: slug
+    return nil unless slug
+
+    Unit.joins(:slugs).where({ slugs: { label: slug.downcase } }).first
   end
 
   def load_health
-    @current_hp     = hitpoints
+    @current_hp      = hitpoints
     @current_shields = shields
   end
 
-  def size_i
-    SIZES.index size
-  end
-
-  def type_i
-    TYPES.index attack["ground"]["type"]
+  def size_s
+    SIZES[size]
   end
 
   def protoss?
@@ -64,17 +49,27 @@ class Unit
     race == "zerg"
   end
 
-private
+  # def to_s
+  #   "<Unit:#{label} asd>"
+  # end
 
-  def add_name_to_slugs
-    if slugs.present? && slugs.index(name).nil?
-      slugs << name
+  def inspect
+    if target
+      "<Unit:#{self[:label]} attack:#{attack.damage}>"
     else
-      self.slugs = [name]
+      "<Unit:#{self[:label]}>"
     end
   end
 
-  def default_label
-    self.label ||= name.split("_").map(&:capitalize).join(" ")
+private
+
+  def create_slugs!
+    Slug.find_or_create_by(unit_id: id, label: name)
+
+    return unless slugnames
+
+    slugnames.each do |label|
+      Slug.find_or_create_by(unit_id: id, label: label)
+    end
   end
 end

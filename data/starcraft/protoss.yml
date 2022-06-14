@@ -10,7 +10,7 @@ units:
         cooldown: 924
 
   dragoon:
-    slugs:
+    slugnames:
       - goon
     size: large
     shields: 80
@@ -25,7 +25,7 @@ units:
       air: same
 
   dark_templar:
-    slugs:
+    slugnames:
       - dt
     shields: 40
     hitpoints: 80
@@ -57,4 +57,3 @@ units:
         damage: 5
         type: explosive
         cooldown: 336
-

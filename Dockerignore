@@ -1,2 +1,8 @@
+# system and editor specific
+.DS_Store
+*.sublime*
+
+# setup specific
 .env
 docker-compose.yml
+db/*.sqlite3

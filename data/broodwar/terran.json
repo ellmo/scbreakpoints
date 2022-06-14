@@ -1,0 +1,79 @@
+{
+  "units": [
+    {
+      "name": "scv",
+      "hitpoints": 60,
+      "g_damage": 5,
+      "g_cooldown": 630
+    },
+    {
+      "name": "marine",
+      "hitpoints": 40,
+      "g_damage": 6,
+      "g_cooldown": 630,
+      "air": "same"
+    },
+    {
+      "name": "firebat",
+      "hitpoints": 50,
+      "armor": 1,
+      "g_damage": 8,
+      "g_attacks": 2,
+      "g_type": 2,
+      "g_cooldown": 924
+    },
+    {
+      "name": "ghost",
+      "hitpoints": 45,
+      "g_damage": 10,
+      "g_attacks": 1,
+      "g_type": 2,
+      "g_cooldown": 924,
+      "air": "same"
+    },
+    {
+      "name": "vulture",
+      "size": 1,
+      "hitpoints": 80,
+      "g_damage": 20,
+      "g_type": 2,
+      "g_bonus": 2,
+      "g_cooldown": 1260
+    },
+    {
+      "name": "Siege Tank",
+      "slugnames": ["tank"],
+      "size": 2,
+      "hitpoints": 150,
+      "armor": 1,
+      "g_damage": 30,
+      "g_bonus": 3,
+      "g_cooldown": 1554
+    },
+    {
+      "name": "Siege Tank (Sieged)",
+      "slugnames": ["siege", "sieged tank"],
+      "size": 2,
+      "hitpoints": 150,
+      "armor": 1,
+      "g_damage": 70,
+      "g_bonus": 5,
+      "g_cooldown": 3150
+    },
+    {
+      "name": "goliath",
+      "slugnames": ["gol"],
+      "size": 2,
+      "hitpoints": 125,
+      "armor": 1,
+      "g_damage": 12,
+      "g_cooldown": 924,
+      "g_bonus": 1,
+      "a_damage": 10,
+      "a_attacks": 2,
+      "a_cooldown": 924,
+      "a_bonus": 2,
+      "a_type": 1
+    }
+  ]
+}

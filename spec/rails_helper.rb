@@ -4,17 +4,14 @@ ENV["RAILS_ENV"] ||= "test"
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 
 require "rspec/rails"
-require "mongoid-rspec"
 # Dir[Rails.root.join("spec", "support", "**", "*.rb")].sort.each { |f| require f }
 
 RSpec.configure do |config|
-  config.include Mongoid::Matchers
   config.use_active_record = false
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
 
   config.before(:suite) do
-    Mongoid.purge!
     Rails.application.load_seed
   end
 

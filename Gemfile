@@ -5,9 +5,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 #======
 # CORE
 #====
-gem "mongoid", "~> 7.4"
 gem "puma", "~> 4.1"
 gem "rails", "~> 6.0.4"
+gem "sqlite3"
 
 #=======
 # FRONT
@@ -41,5 +41,4 @@ end
 
 group :test do
   gem "benchmark-ips"
-  gem "mongoid-rspec"
 end

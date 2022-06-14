@@ -1,13 +1,15 @@
 units:
   overlord:
-    slugs:
+    slugnames:
       - ovie
       - lord
       - over
     hitpoints: 200
+    size: large
+    flying: true
 
   zergling:
-    slugs:
+    slugnames:
       - ling
     hitpoints: 35
     attack:
@@ -16,7 +18,7 @@ units:
         cooldown: 336
 
   hydralisk:
-    slugs:
+    slugnames:
       - hydra
     size: medium
     hitpoints: 80
@@ -28,7 +30,7 @@ units:
       air: same
 
   ultralisk:
-    slugs:
+    slugnames:
       - ultra
     size: large
     hitpoints: 400
@@ -40,7 +42,7 @@ units:
         cooldown: 630
 
   mutalisk:
-    slugs:
+    slugnames:
       - muta
     flying: true
     hitpoints: 120
@@ -52,7 +54,7 @@ units:
 
   guardian:
     size: large
-    slugs:
+    slugnames:
       - guard
     flying: true
     hitpoints: 150

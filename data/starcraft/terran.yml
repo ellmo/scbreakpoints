@@ -5,7 +5,7 @@ units:
     attack:
       ground:
         damage: 5
-        cooldown:
+        cooldown: 630
 
   marine:
     hitpoints: 40
@@ -47,7 +47,7 @@ units:
 
   siege_tank_tank_mode:
     label: "Siege Tank (T)"
-    slugs:
+    slugnames:
       - siege_tank
       - tank
     size: large
@@ -63,7 +63,7 @@ units:
 
   siege_tank_siege_mode:
     label: "Siege Tank (S)"
-    slugs:
+    slugnames:
       - siege
       - sieged_tank
     size: large
@@ -93,7 +93,7 @@ units:
         type: explosive
 
   battlecruiser:
-    slugs:
+    slugnames:
       - bc
     size: large
     hitpoints: 500
