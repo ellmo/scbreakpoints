@@ -44,6 +44,7 @@ jobs:
           name: RSpec
           command: |
             gem install bundler -v=${BUNDLER_VERSION}
+            bundle exec rake db:test:prepare
             bundle exec rspec
 
   rubocop:
