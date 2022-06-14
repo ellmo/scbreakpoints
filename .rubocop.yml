@@ -8,6 +8,7 @@ AllCops:
     - 'app/views/**/*.slim'
     - 'bin/bundle'
     - 'vendor/**/*'
+    - 'db/schema.rb'
 
 # METRICS
 Metrics/MethodLength:
