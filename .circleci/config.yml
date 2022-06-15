@@ -8,19 +8,24 @@ orbs:
 defaults: &defaults
   working_directory: ~/scbreakpoints
 
-ruby_machine: &ruby_machine
-  <<: *defaults
-  docker:
-    - image: cimg/ruby:2.6.6-node
-      environment:
-        RAILS_ENV: test
-        BUNDLE_PATH: vendor/bundle
-        BUNDLER_VERSION: 2.1.4
-  executor: ruby/default
+executors:
+  docker-machine:
+    working_directory: ~/app
+    machine:
+      enabled: true
+      docker_layer_caching: true
+  ruby_machine:
+    docker:
+      - image: cimg/ruby:2.6.6-node
+        environment:
+          RAILS_ENV: test
+          BUNDLE_PATH: vendor/bundle
+          BUNDLER_VERSION: 2.1.4
+    # executor: ruby/default
 
 jobs:
   build:
-    <<: *ruby_machine
+    executor: ruby_machine
     steps:
       - checkout
       - attach_workspace:
@@ -38,7 +43,7 @@ jobs:
           paths:
             - vendor/bundle
   test:
-    <<: *ruby_machine
+    executor: ruby_machine
     steps:
       - checkout
       - attach_workspace:
@@ -51,7 +56,7 @@ jobs:
             bundle exec rspec
 
   rubocop:
-    <<: *ruby_machine
+    executor: ruby_machine
     steps:
       - checkout
       - attach_workspace:
@@ -63,7 +68,7 @@ jobs:
             bundle exec rubocop
 
   build_and_push_image:
-    executor: aws-cli/default
+    executor: docker_machine
     steps:
       - aws-ecr/build-and-push-image:
           aws-access-key-id: AWS_ACCESS_KEY_ID
