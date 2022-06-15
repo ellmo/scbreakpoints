@@ -9,7 +9,7 @@ defaults: &defaults
   working_directory: ~/scbreakpoints
 
 executors:
-  docker-machine:
+  docker_machine:
     working_directory: ~/app
     machine:
       enabled: true
