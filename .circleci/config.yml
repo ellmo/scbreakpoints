@@ -79,16 +79,16 @@ jobs:
           repo: scbreakpoints
           tag: "${CIRCLE_BUILD_NUM},latest"
 
-  push_image:
-    executor: docker_machine
-    steps:
-      - aws-ecs/deploy-service-update:
-          family: "scbreakpoints-service"
-          cluster-name: "scbreakpoints-cluster"
-          container-image-name-updates: "container=scbreakpoints-service,tag=latest"
-          # dockerfile: Dockerfile
-          # attach-workspace: true
-          # workspace-root: ~/scbreakpoints
+  # push_image:
+  #   executor: docker_machine
+  #   steps:
+  #     - aws-ecs/deploy-service-update:
+  #         family: "scbreakpoints-service"
+  #         cluster-name: "scbreakpoints-cluster"
+  #         container-image-name-updates: "container=scbreakpoints-service,tag=latest"
+  #         # dockerfile: Dockerfile
+  #         # attach-workspace: true
+  #         # workspace-root: ~/scbreakpoints
 
 workflows:
   version: 2
@@ -102,7 +102,10 @@ workflows:
       - rubocop:
           requires:
             - build
-      - push_image:
+      - aws-ecs/deploy-service-update:
+          family: "scbreakpoints-service"
+          cluster-name: "scbreakpoints-cluster"
+          container-image-name-updates: "container=scbreakpoints-service,tag=latest"
           requires:
             - build_image
             - test
