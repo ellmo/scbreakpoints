@@ -62,8 +62,7 @@ jobs:
             bundle exec rubocop
 
   build_and_push_image:
-    jobs:
-      executor: docker-machine
+    executor: docker-machine
     steps:
       - aws-ecr/build-and-push-image:
           aws-access-key-id: AWS_ACCESS_KEY_ID
@@ -80,6 +79,7 @@ workflows:
   version: 2
   build_and_test:
     jobs:
+      - build_and_push_image
       - build
       - test:
           requires:
