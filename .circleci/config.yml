@@ -68,7 +68,7 @@ jobs:
             gem install bundler -v=${BUNDLER_VERSION}
             bundle exec rubocop
 
-  build_and_push_image:
+  build_image:
     executor: docker_machine
     steps:
       - aws-ecr/build-and-push-image:
@@ -78,10 +78,11 @@ jobs:
           registry-id: AWS_ECR_REGISTRY_ID
           repo: scbreakpoints
           tag: "${CIRCLE_BUILD_NUM},latest"
+
+  push_image:
+    executor: docker_machine
+    steps:
       - aws-ecs/deploy-service-update:
-          requires:
-            - aws-ecr/build-and-push-image
-            - test
           family: "scbreakpoints-service"
           cluster-name: "scbreakpoints-cluster"
           container-image-name-updates: "container=scbreakpoints-service,tag=latest"
@@ -93,7 +94,7 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build_and_push_image
+      - build_image
       - build
       - test:
           requires:
@@ -101,4 +102,26 @@ workflows:
       - rubocop:
           requires:
             - build
+      - push_image:
+          requires:
+            - build_image
+            - test
 
+# version: 2.1
+
+# orbs:
+#   aws-ecr: circleci/aws-ecr@x.y.z
+#   aws-ecs: circleci/aws-ecs@0x.y.z
+
+# workflows:
+#   build-and-deploy:
+#     jobs:
+#       - aws-ecr/build-and-push-image:
+#           repo: "${AWS_RESOURCE_NAME_PREFIX}"
+#           tag: "${CIRCLE_SHA1}"
+#       - aws-ecs/deploy-service-update:
+#           requires:
+#             - aws-ecr/build-and-push-image # only run this job once aws-ecr/build-and-push-image has completed
+#           family: "${AWS_RESOURCE_NAME_PREFIX}-service"
+#           cluster-name: "${AWS_RESOURCE_NAME_PREFIX}-cluster"
+#           container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
