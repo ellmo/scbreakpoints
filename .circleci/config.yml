@@ -10,11 +10,12 @@ defaults: &defaults
 
 executors:
   docker_machine:
-    working_directory: ~/app
+    <<: *defaults
     machine:
       enabled: true
       docker_layer_caching: true
   ruby_machine:
+    <<: *defaults
     docker:
       - image: cimg/ruby:2.6.6-node
         environment:
