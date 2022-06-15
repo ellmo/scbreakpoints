@@ -72,13 +72,13 @@ jobs:
     executor: docker_machine
     steps:
       - aws-ecr/build-and-push-image:
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          region: eu-central-1
-          registry-id: AWS_ECR_REGISTRY_ID
-          repo: scbreakpoints
-          tag: "${CIRCLE_BUILD_NUM},latest"
-     - aws-ecs/deploy-service-update:
+        aws-access-key-id: AWS_ACCESS_KEY_ID
+        aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+        region: eu-central-1
+        registry-id: AWS_ECR_REGISTRY_ID
+        repo: scbreakpoints
+        tag: "${CIRCLE_BUILD_NUM},latest"
+      - aws-ecs/deploy-service-update:
         requires:
           - aws-ecr/build-and-push-image
           - test
