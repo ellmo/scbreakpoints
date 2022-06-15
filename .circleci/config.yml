@@ -93,10 +93,7 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build_and_push_image:
-        filters:
-          branches:
-            ignore: master
+      - build_and_push_image
       - build
       - test:
           requires:
