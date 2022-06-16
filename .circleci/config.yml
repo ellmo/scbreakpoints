@@ -22,7 +22,6 @@ executors:
           RAILS_ENV: test
           BUNDLE_PATH: vendor/bundle
           BUNDLER_VERSION: 2.1.4
-    # executor: ruby/default
 
 jobs:
   build:
@@ -79,17 +78,6 @@ jobs:
           repo: scbreakpoints
           tag: "${CIRCLE_BUILD_NUM},latest"
 
-  # push_image:
-  #   executor: docker_machine
-  #   steps:
-  #     - aws-ecs/deploy-service-update:
-  #         family: "scbreakpoints-service"
-  #         cluster-name: "scbreakpoints-cluster"
-  #         container-image-name-updates: "container=scbreakpoints-service,tag=latest"
-  #         # dockerfile: Dockerfile
-  #         # attach-workspace: true
-  #         # workspace-root: ~/scbreakpoints
-
 workflows:
   version: 2
   build_and_test:
@@ -102,29 +90,10 @@ workflows:
       - rubocop:
           requires:
             - build
-      - aws-ecs/deploy-service-update:
-          family: "scbreakpoints-service"
+      - aws-ecs/deploy-service-update: # ABOSLUTELY NEEDS AWS_REGION set up in CircleCi
+          family: "scbreakpoints-task"
           cluster-name: "scbreakpoints-cluster"
           container-image-name-updates: "container=scbreakpoints-service,tag=latest"
           requires:
             - build_image
             - test
-
-# version: 2.1
-
-# orbs:
-#   aws-ecr: circleci/aws-ecr@x.y.z
-#   aws-ecs: circleci/aws-ecs@0x.y.z
-
-# workflows:
-#   build-and-deploy:
-#     jobs:
-#       - aws-ecr/build-and-push-image:
-#           repo: "${AWS_RESOURCE_NAME_PREFIX}"
-#           tag: "${CIRCLE_SHA1}"
-#       - aws-ecs/deploy-service-update:
-#           requires:
-#             - aws-ecr/build-and-push-image # only run this job once aws-ecr/build-and-push-image has completed
-#           family: "${AWS_RESOURCE_NAME_PREFIX}-service"
-#           cluster-name: "${AWS_RESOURCE_NAME_PREFIX}-cluster"
-#           container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
