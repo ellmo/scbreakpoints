@@ -91,9 +91,9 @@ workflows:
           requires:
             - build
       - aws-ecs/deploy-service-update: # ABOSLUTELY NEEDS AWS_REGION set up in CircleCi
-          family: "scbreakpoints-task"
-          cluster-name: "scbreakpoints-cluster"
-          container-image-name-updates: "container=scbreakpoints-service,tag=latest"
+          family: "scbreakpoints-task" # Task Definition family
+          cluster-name: "scbreakpoints-cluster" # ECS Cluster
+          container-image-name-updates: "container=scbreakpoints,tag=latest" # ECR repo,tag
           requires:
             - build_image
             - test
