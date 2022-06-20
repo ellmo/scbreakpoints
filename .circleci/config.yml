@@ -83,7 +83,7 @@ jobs:
     steps:
       - aws-ecs/update-service:
           cluster-name: 'scbreakpoints-cluster'
-          container-image-name-updates: 'container=scbreakpoints-task,tag=stable'
+          container-image-name-updates: 'container=scbreakpoints-task,tag=latest'
           family: 'scbreakpoints-task'
           service-name: 'scbreakpoints-service'
 
