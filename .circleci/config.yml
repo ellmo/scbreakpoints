@@ -78,6 +78,13 @@ jobs:
           registry-id: AWS_ECR_REGISTRY_ID
           repo: scbreakpoints
           tag: "${CIRCLE_BUILD_NUM},latest"
+  deploy:
+    steps:
+      - aws-ecs/update-service:
+          cluster-name: 'scbreakponts-cluster'
+          container-image-name-updates: 'container=scbreakponts-task,tag=stable'
+          family: 'scbreakponts-task'
+          service-name: 'scbreakpoints-service'
 
 workflows:
   version: 2
@@ -91,11 +98,7 @@ workflows:
       - rubocop:
           requires:
             - build
-      - aws-ecs/update-service:
-          cluster-name: 'scbreakponts-cluster'
-          container-image-name-updates: 'container=scbreakponts-task,tag=stable'
-          family: 'scbreakponts-task'
-          service-name: 'scbreakpoints-service'
+      - deploy:
           requires:
             - build_image
             - test
