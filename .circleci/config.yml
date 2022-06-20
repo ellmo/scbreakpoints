@@ -1,23 +1,31 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@0.1.2
+  ruby: circleci/ruby@1.8.0
+  aws-cli: circleci/aws-cli@3.1.1
+  aws-ecr: circleci/aws-ecr@8.1.2
+  aws-ecs: circleci/aws-ecs@2.3.0
 
 defaults: &defaults
   working_directory: ~/scbreakpoints
 
-ruby_machine: &ruby_machine
-  <<: *defaults
-  docker:
-    - image: cimg/ruby:2.6.6-node
-      environment:
-        RAILS_ENV: test
-        BUNDLE_PATH: vendor/bundle
-        BUNDLER_VERSION: 2.1.4
-  executor: ruby/default
+executors:
+  docker_machine:
+    <<: *defaults
+    machine:
+      enabled: true
+      docker_layer_caching: true
+  ruby_machine:
+    <<: *defaults
+    docker:
+      - image: cimg/ruby:2.6.6-node
+        environment:
+          RAILS_ENV: test
+          BUNDLE_PATH: vendor/bundle
+          BUNDLER_VERSION: 2.1.4
 
 jobs:
   build:
-    <<: *ruby_machine
+    executor: ruby_machine
     steps:
       - checkout
       - attach_workspace:
@@ -34,8 +42,9 @@ jobs:
           root: ~/scbreakpoints
           paths:
             - vendor/bundle
+
   test:
-    <<: *ruby_machine
+    executor: ruby_machine
     steps:
       - checkout
       - attach_workspace:
@@ -48,7 +57,7 @@ jobs:
             bundle exec rspec
 
   rubocop:
-    <<: *ruby_machine
+    executor: ruby_machine
     steps:
       - checkout
       - attach_workspace:
@@ -59,11 +68,30 @@ jobs:
             gem install bundler -v=${BUNDLER_VERSION}
             bundle exec rubocop
 
+  build_image:
+    executor: docker_machine
+    steps:
+      - aws-ecr/build-and-push-image:
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          region: eu-central-1
+          registry-id: AWS_ECR_REGISTRY_ID
+          repo: scbreakpoints
+          tag: "${CIRCLE_BUILD_NUM},latest"
+  deploy:
+    executor: docker_machine
+    steps:
+      - aws-ecs/update-service:
+          cluster-name: 'scbreakpoints-cluster'
+          container-image-name-updates: 'container=scbreakpoints-task,tag=latest'
+          family: 'scbreakpoints-task'
+          service-name: 'scbreakpoints-service'
 
 workflows:
   version: 2
   build_and_test:
     jobs:
+      - build_image
       - build
       - test:
           requires:
@@ -71,3 +99,7 @@ workflows:
       - rubocop:
           requires:
             - build
+      - deploy:
+          requires:
+            - build_image
+            - test
