@@ -82,9 +82,9 @@ jobs:
     executor: docker_machine
     steps:
       - aws-ecs/update-service:
-          cluster-name: 'scbreakponts-cluster'
-          container-image-name-updates: 'container=scbreakponts-task,tag=stable'
-          family: 'scbreakponts-task'
+          cluster-name: 'scbreakpoints-cluster'
+          container-image-name-updates: 'container=scbreakpoints-task,tag=stable'
+          family: 'scbreakpoints-task'
           service-name: 'scbreakpoints-service'
 
 workflows:
