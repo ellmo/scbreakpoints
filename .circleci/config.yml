@@ -91,10 +91,10 @@ workflows:
       - rubocop:
           requires:
             - build
-      - aws-ecs/deploy-service-update: # ABOSLUTELY NEEDS AWS_REGION set up in CircleCi
-          family: "scbreakpoints-task" # Task Definition family
-          cluster-name: "scbreakpoints-cluster" # ECS Cluster
-          container-image-name-updates: "container=scbreakpoints-task,tag=latest" # ECR repo,tag
+      - aws-ecs/update-service:
+          cluster-name: 'scbreakponts-cluster'
+          container-image-name-updates: 'container=scbreakponts-task,tag=stable'
+          family: 'scbreakponts-task'
           requires:
             - build_image
             - test
