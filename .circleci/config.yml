@@ -42,6 +42,7 @@ jobs:
           root: ~/scbreakpoints
           paths:
             - vendor/bundle
+
   test:
     executor: ruby_machine
     steps:
@@ -93,7 +94,7 @@ workflows:
       - aws-ecs/deploy-service-update: # ABOSLUTELY NEEDS AWS_REGION set up in CircleCi
           family: "scbreakpoints-task" # Task Definition family
           cluster-name: "scbreakpoints-cluster" # ECS Cluster
-          container-image-name-updates: "container=scbreakpoints,tag=latest" # ECR repo,tag
+          container-image-name-updates: "container=scbreakpoints-task,tag=latest" # ECR repo,tag
           requires:
             - build_image
             - test
