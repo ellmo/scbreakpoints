@@ -95,6 +95,7 @@ workflows:
           cluster-name: 'scbreakponts-cluster'
           container-image-name-updates: 'container=scbreakponts-task,tag=stable'
           family: 'scbreakponts-task'
+          service-name: 'scbreakpoints-service'
           requires:
             - build_image
             - test
