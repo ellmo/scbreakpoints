@@ -79,6 +79,7 @@ jobs:
           repo: scbreakpoints
           tag: "${CIRCLE_BUILD_NUM},latest"
   deploy:
+    executor: docker_machine
     steps:
       - aws-ecs/update-service:
           cluster-name: 'scbreakponts-cluster'
