@@ -91,7 +91,6 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build_image
       - build
       - test:
           requires:
@@ -99,7 +98,16 @@ workflows:
       - rubocop:
           requires:
             - build
+      - build_image:
+          filters:
+            branches:
+              only: master
+          requires:
+            - test
+            - rubocop
       - deploy:
+          filters:
+            branches:
+              only: master
           requires:
             - build_image
-            - test
