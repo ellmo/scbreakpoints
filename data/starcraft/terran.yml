@@ -45,6 +45,17 @@ units:
         bonus: 2
         cooldown: 1260
 
+  spider_mine:
+    slugnames:
+      - mine
+    hitpoints: 25
+    suicide: yes
+    attack:
+      ground:
+        damage: 125
+        type: explosive
+        cooldown: 0
+
   siege_tank_tank_mode:
     label: "Siege Tank (T)"
     slugnames:

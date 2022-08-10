@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_04_165626) do
+ActiveRecord::Schema.define(version: 2022_08_10_193927) do
 
   create_table "slugs", force: :cascade do |t|
     t.string "label"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2022_06_04_165626) do
     t.integer "a_attacks", default: 1
     t.integer "a_bonus", default: 1
     t.integer "a_type", default: 0
+    t.boolean "suicide", default: false
   end
 
 end

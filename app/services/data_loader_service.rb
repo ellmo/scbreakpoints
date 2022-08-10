@@ -29,10 +29,11 @@ class DataLoaderService < BaseService
   #   Transform YAML loaded attributes to "model-appropriate"
   def transform_unit_attributes(attributes)
     unit_data = {
-      name:  attributes[:name],
-      label: attributes.delete(:label) || attributes[:name].to_s.titleize,
-      race:  attributes[:race],
-      size:  size_to_i(attributes.delete(:size))
+      name:    attributes[:name],
+      label:   attributes.delete(:label) || attributes[:name].to_s.titleize,
+      race:    attributes[:race],
+      size:    size_to_i(attributes.delete(:size)),
+      suicide: attributes[:suicide]
     }.merge(attributes.slice(:hitpoints, :shields, :armor, :flying, :slugnames))
 
     # return early if no attacks are present at all
