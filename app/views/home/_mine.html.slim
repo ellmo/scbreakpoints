@@ -1,13 +1,17 @@
 ul.tabs.race-selector#my-race-tabs data-tabs=""
   = race_selector("terran", mine: mine)
-  = race_selector("zerg", mine: mine)
   = race_selector("protoss", mine: mine)
+  = race_selector("zerg", mine: mine)
+
 
 .tabs-content.race-tab data-tabs-content="my-race-tabs"
   = race_tab "terran", mine: mine
-    p HUMAN
-  = race_tab "zerg", mine: mine
-    p DJERG
+    = render "terran"
   = race_tab "protoss", mine: mine
-    p PROTOSZ
+    = render "protoss"
+  = race_tab "zerg", mine: mine
+    = render "zerg"
+
+
+.
 

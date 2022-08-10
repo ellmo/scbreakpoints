@@ -12,6 +12,10 @@ class HomeController < ApplicationController
 private
 
   def fetch_records
+    @all_terran_units  ||= Unit.terran
+    @all_protoss_units ||= Unit.protoss
+    @all_zerg_units    ||= Unit.zerg
+
     combatants = params[:combatants].try(:split, ":")
 
     @attacker = Unit.find(combatants.try(:first))
