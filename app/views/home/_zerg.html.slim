@@ -1,4 +1,4 @@
 .grid-x.grid-padding-x
   - @all_zerg_units.each do |unit|
     .cell.small-3
-      p= unit.label
+      = tag(:img, src: "/assets/wireframes/#{unit.name}.png", alt: unit.label)

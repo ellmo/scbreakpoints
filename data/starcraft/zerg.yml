@@ -1,4 +1,11 @@
 units:
+  drone:
+    hitpoints: 40
+    attack:
+      ground:
+        damage: 5
+        cooldown: 924
+
   overlord:
     slugnames:
       - ovie
@@ -17,6 +24,15 @@ units:
         damage: 5
         cooldown: 336
 
+  crackling:
+    slugnames:
+      - ling
+    hitpoints: 35
+    attack:
+      ground:
+        damage: 5
+        cooldown: 252
+
   hydralisk:
     slugnames:
       - hydra
@@ -28,6 +44,18 @@ units:
         type: explosive
         cooldown: 630
       air: same
+
+  lurker:
+    slugnames:
+      - lurk
+    size: large
+    hitpoints: 125
+    attack:
+      ground:
+        damage: 20
+        bonus: 2
+        type: explosive
+        cooldown: 1554
 
   ultralisk:
     slugnames:
@@ -41,6 +69,11 @@ units:
         bonus: 3
         cooldown: 630
 
+  defiler:
+    size: medium
+    hitpoints: 80
+    armor: 1
+
   mutalisk:
     slugnames:
       - muta
@@ -51,6 +84,21 @@ units:
         damage: 9
         cooldown: 1260
       air: same
+
+  scourge:
+    flying: true
+    suicide: true
+    hitpoints: 25
+    attack:
+      air:
+        damage: 110
+        type: explosive
+        cooldown: 0
+
+  queen:
+    size: medium
+    flying: true
+    hitpoints: 120
 
   guardian:
     size: large
@@ -75,3 +123,58 @@ units:
         damage: 25
         bonus: 2
         cooldown: 4200
+
+  sunken_colony:
+    size: large
+    hitpoints: 300
+    armor: 2
+    attack:
+      ground:
+        damage: 40
+        type: explosive
+        bonus: 0
+        cooldown: 1344
+
+  spore_colony:
+    size: large
+    hitpoints: 400
+    attack:
+      air:
+        damage: 15
+        bonus: 0
+        cooldown: 630
+
+  broodling:
+    hitpoints: 30
+    attack:
+      ground:
+        damage: 4
+        cooldown: 630
+
+  infested_terran:
+    slugnames:
+      - infested
+    suicide: true
+    hitpoints: 60
+    attack:
+      ground:
+        damage: 500
+        type: explosive
+        bonus: 0
+        cooldown: 0
+
+  larva:
+    hitpoints: 25
+    armor: 10
+
+  egg:
+    hitpoints: 200
+    armor: 10
+
+  lurker_egg:
+    hitpoints: 200
+    armor: 10
+
+
+
+

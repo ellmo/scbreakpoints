@@ -1,4 +1,12 @@
 units:
+  probe:
+    shields: 20
+    hitpoints: 20
+    attack:
+      ground:
+        damage: 5
+        cooldown: 924
+
   zealot:
     shields: 60
     hitpoints: 100
@@ -24,6 +32,14 @@ units:
         cooldown: 1260
       air: same
 
+  high_templar:
+    slugnames:
+      - templar
+      - ht
+    shields: 40
+    hitpoints: 40
+    armor: 0
+
   dark_templar:
     slugnames:
       - dt
@@ -36,6 +52,40 @@ units:
         bonus: 3
         cooldown: 1260
 
+  archon:
+    size: large
+    shields: 350
+    hitpoints: 10
+    armor: 0
+    attack:
+      ground:
+        damage: 30
+        bonus: 3
+        cooldown: 840
+        type: explosive
+
+  dark_archon:
+    size: large
+    shields: 200
+    hitpoints: 25
+    armor: 1
+
+  shuttle:
+    size: large
+    flying: true
+    shields: 60
+    hitpoints: 80
+    armor: 1
+
+  observer:
+    slugnames:
+      - obs
+    size: small
+    flying: true
+    shields: 20
+    hitpoints: 40
+    armor: 0
+
   reaver:
     size: large
     shields: 80
@@ -45,6 +95,22 @@ units:
         damage: 100
         bonus: 25
         cooldown: 2520
+
+  scout:
+    size: large
+    flying: true
+    shields: 100
+    hitpoints: 150
+    armor: 0
+    attack:
+      air:
+        damage: 14
+        attacks: 2
+        bonus: 2
+        cooldown: 924
+      ground:
+        damage: 8
+        cooldown: 1260
 
   corsair:
     size: medium
@@ -57,3 +123,44 @@ units:
         damage: 5
         type: explosive
         cooldown: 336
+
+  carrier:
+    size: large
+    flying: true
+    shields: 150
+    hitpoints: 300
+    armor: 4
+
+  arbiter:
+    size: large
+    flying: true
+    shields: 150
+    hitpoints: 200
+    armor: 1
+    attack:
+      ground:
+        damage: 10
+        type: explosive
+      air: same
+
+  photon_cannon:
+    slugnames:
+      - photon
+    size: large
+    shields: 100
+    hitpoints: 100
+    attack:
+      ground:
+        damage: 20
+        cooldown: 924
+      air: same
+
+  interceptor:
+    flying: true
+    shields: 40
+    hitpoints: 40
+    attack:
+      ground:
+        damage: 6
+        cooldown: 1554
+      air: same

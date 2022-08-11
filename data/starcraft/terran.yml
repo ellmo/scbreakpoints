@@ -25,6 +25,10 @@ units:
         type: plasma
         cooldown: 924
 
+  medic:
+    hitpoints: 50
+    armor: 1
+
   ghost:
     hitpoints: 45
     attack:
@@ -44,17 +48,6 @@ units:
         type: plasma
         bonus: 2
         cooldown: 1260
-
-  spider_mine:
-    slugnames:
-      - mine
-    hitpoints: 25
-    suicide: yes
-    attack:
-      ground:
-        damage: 125
-        type: explosive
-        cooldown: 0
 
   siege_tank_tank_mode:
     label: "Siege Tank (T)"
@@ -103,6 +96,43 @@ units:
         cooldown: 924
         type: explosive
 
+  wraith:
+    size: large
+    hitpoints: 125
+    armor: 1
+    attack:
+      ground:
+        damage: 8
+        bonus: 1
+        cooldown: 1260
+      air:
+        damage: 10
+        attacks: 2
+        bonus: 1
+        cooldown: 924
+        type: explosive
+
+  dropship:
+    size: large
+    hitpoints: 150
+    armor: 1
+
+  valkyrie:
+    size: large
+    hitpoints: 200
+    armor: 2
+    attack:
+      air:
+        damage: 8
+        attacks: 6
+        cooldown: 2688
+        type: explosive
+
+  science_vessel:
+    size: large
+    hitpoints: 200
+    armor: 1
+
   battlecruiser:
     slugnames:
       - bc
@@ -116,3 +146,26 @@ units:
         bonus: 3
         cooldown: 1260
       air: same
+
+  spider_mine:
+    slugnames:
+      - mine
+    hitpoints: 25
+    suicide: yes
+    attack:
+      ground:
+        damage: 125
+        type: explosive
+        cooldown: 0
+
+  turret:
+    size: large
+    hitpoints: 200
+    armor: 1
+    attack:
+      air:
+        damage: 20
+        type: explosive
+        cooldown: 630
+
+
