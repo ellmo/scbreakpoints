@@ -26,4 +26,24 @@ class String
 
     "\e[#{color_code}m#{self}\e[0m"
   end
+
+  def race?
+    terran? || zerg? || protoss?
+  end
+
+  def race
+    self if race?
+  end
+
+  def terran?
+    downcase.in? %w[t terran]
+  end
+
+  def zerg?
+    downcase.in? %w[z zerg]
+  end
+
+  def protoss?
+    downcase.in? %w[p protoss]
+  end
 end
