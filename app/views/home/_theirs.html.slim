@@ -3,11 +3,10 @@ ul.tabs.race-selector#their-race-tabs data-tabs=""
   = race_selector("protoss", theirs: theirs)
   = race_selector("zerg", theirs: theirs)
 
-.tabs-content.race-tab data-tabs-content="their-race-tabs"
+.tabs-content.race-tab.theirs data-tabs-content="their-race-tabs"
   = race_tab "terran", theirs: theirs
-    p HUMAN
+    = render "terran"
   = race_tab "protoss", theirs: theirs
-    p PROTOSZ
+    = render "protoss"
   = race_tab "zerg", theirs: theirs
-    p DJERG
-
+    = render "zerg"
