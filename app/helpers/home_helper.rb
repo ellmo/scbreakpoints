@@ -14,8 +14,9 @@ module HomeHelper
     end
   end
 
-  def race_selected?(race, arg)
-    arg.race == race
+  def race_selected?(_race, _arg)
+    "terran"
+    # arg.race == race
   end
 
   def active_element?(race, arg)
