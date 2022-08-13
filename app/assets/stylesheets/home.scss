@@ -36,6 +36,11 @@
   background-color: $dark-gray;
   border: 0;
 
+  img:hover {
+    background: black;
+    border: 2px #74ff00 solid;
+  }
+
   &.theirs {
     img {
       -webkit-transform: scaleX(-1);
