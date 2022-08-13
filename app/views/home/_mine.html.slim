@@ -1,16 +1,16 @@
 ul.tabs.race-selector#my-race-tabs data-tabs=""
-  = race_selector("terran", mine: mine)
-  = race_selector("protoss", mine: mine)
-  = race_selector("zerg", mine: mine)
+  li.tabs-title
+    a.terran#my-terran-label(href="#my-terran")
+  li.tabs-title
+    a.protoss#my-protoss-label(href="#my-protoss")
+  li.tabs-title
+    a.zerg#my-zerg-label(href="#my-zerg")
 
 .tabs-content.race-tab data-tabs-content="my-race-tabs"
-  = race_tab "terran", mine: mine
-    = render "terran"
-  = race_tab "protoss", mine: mine
-    = render "protoss"
-  = race_tab "zerg", mine: mine
-    = render "zerg"
-
-
-.
+  .tabs-panel#my-terran
+    = render "unit_selector", units: @all_terran_units
+  .tabs-panel#my-protoss
+    = render "unit_selector", units: @all_protoss_units
+  .tabs-panel#my-zerg
+    = render "unit_selector", units: @all_zerg_units
 

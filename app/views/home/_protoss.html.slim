@@ -1,4 +1,5 @@
 .grid-x.grid-padding-x
   - @all_protoss_units.each do |unit|
     .cell.small-3
-      = tag(:img, src: "/assets/wireframes/#{unit.name}.png", alt: unit.label)
+      = link_to("#", data: { "unit-id" => unit.id })
+        = tag(:img, src: "/assets/wireframes/#{unit.name}.png", alt: unit.label)
