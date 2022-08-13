@@ -36,12 +36,19 @@
   background-color: $dark-gray;
   border: 0;
 
+
   img:hover {
     background: black;
-    border: 2px #74ff00 solid;
+    border: 1px $medium-gray solid;
   }
 
-  &.theirs {
+  a.selected img {
+    background: black;
+    border: 2px #74ff00 solid
+  }
+
+
+  &#theirs-content {
     img {
       -webkit-transform: scaleX(-1);
       transform: scaleX(-1);

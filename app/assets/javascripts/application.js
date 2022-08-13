@@ -28,9 +28,15 @@ function uncover_mine(id){
   $(`#my-tabs li`)
     .removeClass('is-active');
 
-  $(`div#my-content a[data-unit-id=${id}]`)
+  race = $(`div#my-content a[data-unit-id=${id}]`)
+    .addClass('selected')
     .closest(`.tabs-panel`)
     .addClass(`is-active`)
+    .attr('id')
+
+  $(`a#${race}-label`)
+    .parent()
+    .addClass('is-active');
 }
 
 function uncover_theirs(id){
@@ -39,7 +45,13 @@ function uncover_theirs(id){
   $(`#theirs-tabs li`)
     .removeClass('is-active');
 
-  $(`div#theirs-content a[data-unit-id=${id}]`)
+  race = $(`div#theirs-content a[data-unit-id=${id}]`)
+    .addClass('selected')
     .closest(`.tabs-panel`)
     .addClass(`is-active`)
+    .attr('id')
+
+  $(`a#${race}-label`)
+    .parent()
+    .addClass('is-active');
 }
