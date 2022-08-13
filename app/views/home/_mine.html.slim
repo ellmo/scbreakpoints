@@ -1,4 +1,4 @@
-ul.tabs.race-selector#my-race-tabs data-tabs=""
+ul.tabs.race-selector#my-tabs data-tabs=""
   li.tabs-title
     a.terran#my-terran-label(href="#my-terran")
   li.tabs-title
@@ -6,7 +6,7 @@ ul.tabs.race-selector#my-race-tabs data-tabs=""
   li.tabs-title
     a.zerg#my-zerg-label(href="#my-zerg")
 
-.tabs-content.race-tab data-tabs-content="my-race-tabs"
+.tabs-content.race-tab#my-content data-tabs-content="my-race-tabs"
   .tabs-panel#my-terran
     = render "unit_selector", units: @all_terran_units
   .tabs-panel#my-protoss

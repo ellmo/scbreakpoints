@@ -1,5 +1,0 @@
-.grid-x.grid-padding-x
-  - @all_terran_units.each do |unit|
-    .cell.small-3
-      = link_to("#", data: { "unit-id" => unit.id })
-        = tag(:img, src: "/assets/wireframes/#{unit.name}.png", alt: unit.label)
