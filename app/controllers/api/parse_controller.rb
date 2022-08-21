@@ -5,7 +5,7 @@ module Api
     def index
       parse_combatants
 
-      render json: { attacker: attacker.id, target: target.id }
+      render json: { attacker: attacker.name, target: target.name }
     end
 
   private

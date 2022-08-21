@@ -1,5 +1,5 @@
 .grid-x.grid-padding-x
   - units.each do |unit|
     .cell.small-3
-      = link_to("#", data: { "unit-id" => unit.id })
+      = link_to(unit.name, data: { "unit-id" => unit.id, "unit-name" => unit.name })
         = tag(:img, src: "/assets/wireframes/#{unit.name}.png", alt: unit.label)
