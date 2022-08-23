@@ -1,6 +1,9 @@
 //= require foundation
 
-$(function(){ setup() });
+$(function(){
+  updateState();
+  setup();
+});
 
 function setup(){
   $(document).foundation();
@@ -13,6 +16,18 @@ function setup(){
     uncover("theirs", data.target);
   })
 }
+
+function updateState(html=null, path=null){
+  html = html || document.documentElement.innerHTML;
+  path = path || window.location.pathname
+
+  window.history.pushState({ "html": html }, "", path);
+}
+
+function replacePage(html){
+  document.documentElement.innerHTML = html;
+}
+
 
 function parsed_url(){
   path   = "/api/parse"
@@ -67,9 +82,16 @@ function unit_clicked(event){
   event.preventDefault();
   href = $(event.currentTarget).attr("href")
 
-  $.get(href, function(data, _status, _dupa){
-    window.history.pushState({"html":data,"pageTitle":""},"", href);
-    document.documentElement.innerHTML = data;
+  $.get(href, function(html, _status, _response){
+    updateState(html, href);
+    replacePage(html);
     setup();
   })
 }
+
+window.onpopstate = function(event){
+  if(event.state && event.state.html){
+    replacePage(event.state.html)
+    setup();
+  }
+};
