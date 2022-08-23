@@ -34,3 +34,5 @@
 # Ignore SQLite database files, but keep config
 db/*.sqlite3
 !config/database.yml
+
+/config/credentials/production.key
