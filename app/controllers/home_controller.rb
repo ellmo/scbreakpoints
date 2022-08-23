@@ -1,9 +1,7 @@
 class HomeController < ApplicationController
   before_action :fetch_records
 
-  def index
-    render locals: { mine: @attacker, theirs: @target }
-  end
+  def index; end
 
   def params
     @params ||= super.permit(:combatants)
@@ -12,11 +10,10 @@ class HomeController < ApplicationController
 private
 
   def fetch_records
-    combatants = params[:combatants].try(:split, ":")
+    @all_terran_units  ||= Unit.terran
+    @all_protoss_units ||= Unit.protoss
+    @all_zerg_units    ||= Unit.zerg
 
-    @attacker = Unit.find(combatants.try(:first))
-    @target   = Unit.find(combatants.try(:second))
-
-    redirect_to "/marine:marine" unless @attacker && @target
+    nil
   end
 end

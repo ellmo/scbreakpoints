@@ -1,12 +1,12 @@
 @import '_settings';
 
 .spaceholder {
-  background-color: $dark-gray;
+  background-color: $medium-gray;
   border: 1px solid lime;
 }
 
 .tabs.race-selector {
-  background: $dark-gray;
+  background: $medium-gray;
   border: 0;
 
   li {
@@ -23,6 +23,8 @@
       &.zerg { background-image: asset_url("zerg-inactive.png"); }
     }
     &.is-active {
+      a { background-color: $dark-gray; }
+
       .terran { background-image: asset_url("terran.png"); }
       .protoss { background-image: asset_url("protoss.png"); }
       .zerg { background-image: asset_url("zerg.png"); }
@@ -31,10 +33,29 @@
 }
 
 .tabs-content.race-tab {
-  background-color: $medium-gray;
+  background-color: $dark-gray;
   border: 0;
+
+
+  img:hover {
+    background: black;
+    border: 1px $medium-gray solid;
+  }
+
+  a.selected img {
+    background: black;
+    border: 2px #74ff00 solid
+  }
+
+
+  &#theirs-content {
+    img {
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+    }
+  }
 }
 
 #footer {
-  color: $dark-gray;
+  color: $medium-gray;
 }

@@ -6,23 +6,23 @@ describe "Home" do
       it "returns http success" do
         get "/"
 
-        expect(response).to have_http_status(:redirect)
+        expect(response).to have_http_status(:success)
       end
     end
 
     context "wrong params" do
-      it "returns http redirect" do
+      it "returns http success" do
         get "/dupa:kupa"
 
-        expect(response).to have_http_status(:redirect)
+        expect(response).to have_http_status(:success)
       end
     end
 
     context "slightly wrong params" do
-      it "returns http redirect" do
+      it "returns http success" do
         get "/ling:protos"
 
-        expect(response).to have_http_status(:redirect)
+        expect(response).to have_http_status(:success)
       end
     end
 

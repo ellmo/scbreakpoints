@@ -14,15 +14,9 @@ module HomeHelper
     end
   end
 
-  def race_selected(arg)
-    return arg.name if arg.is_a?(Race)
-    return arg.race if arg.is_a?(Unit)
-
-    nil
-  end
-
-  def race_selected?(race, arg)
-    race_selected(arg) == race
+  def race_selected?(_race, _arg)
+    "terran"
+    # arg.race == race
   end
 
   def active_element?(race, arg)

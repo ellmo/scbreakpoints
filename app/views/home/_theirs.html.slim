@@ -1,12 +1,16 @@
-ul.tabs.race-selector#their-race-tabs data-tabs=""
-  = race_selector("terran", theirs: theirs)
-  = race_selector("zerg", theirs: theirs)
-  = race_selector("protoss", theirs: theirs)
+ul.tabs.race-selector#theirs-tabs data-tabs=""
+  li.tabs-title
+    a.terran#theirs-terran-label(href="#theirs-terran")
+  li.tabs-title
+    a.protoss#theirs-protoss-label(href="#theirs-protoss")
+  li.tabs-title
+    a.zerg#theirs-zerg-label(href="#theirs-zerg")
 
-.tabs-content.race-tab data-tabs-content="their-race-tabs"
-  = race_tab "terran", theirs: theirs
-    p HUMAN
-  = race_tab "zerg", theirs: theirs
-    p DJERG
-  = race_tab "protoss", theirs: theirs
-    p PROTOSZ
+.tabs-content.race-tab#theirs-content data-tabs-content="theirs-tabs"
+  .tabs-panel#theirs-terran
+    = render "unit_selector", units: @all_terran_units
+  .tabs-panel#theirs-protoss
+    = render "unit_selector", units: @all_protoss_units
+  .tabs-panel#theirs-zerg
+    = render "unit_selector", units: @all_zerg_units
+

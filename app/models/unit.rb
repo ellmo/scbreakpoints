@@ -16,6 +16,13 @@ class Unit < ApplicationRecord
   after_save :create_slugs!
   after_initialize :load_health
 
+#========
+#= SCOPE
+#======
+  scope :terran,  -> { where(race: "terran") }
+  scope :protoss, -> { where(race: "protoss") }
+  scope :zerg,    -> { where(race: "zerg") }
+
 #==========
 #= METHODS
 #========
